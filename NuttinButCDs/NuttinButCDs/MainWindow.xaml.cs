@@ -24,28 +24,28 @@ namespace NuttinButCDs
             InitializeComponent();
         }
 
-        private void editButton_Click(object sender, RoutedEventArgs e)
+        private void EditButtonClick(object sender, RoutedEventArgs e)
         {
             EditCD editCd = new EditCD();
             editCd.ShowDialog();
         }
 
-        private void newGenreButton_Click(object sender, RoutedEventArgs e)
+        private void NewGenreButtonClick(object sender, RoutedEventArgs e)
         {
             NewGenre newGenre = new NewGenre();
             newGenre.ShowDialog();
         }
 
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteButtonClick(object sender, RoutedEventArgs e)
         {
             Delete delete = new Delete();
             delete.ShowDialog();
         }
 
-        private void addButton_Click(object sender, RoutedEventArgs e)
+        private void AddButtonClick(object sender, RoutedEventArgs e)
         {
-            AddCD addCD = new AddCD();
-            addCD.ShowDialog();
+            AddCd addCd = new AddCd();
+            addCd.ShowDialog();
         }
     }
 }

@@ -6,10 +6,10 @@
     </Window.Resources>
 
     <StackPanel Height="312" HorizontalAlignment="Stretch" Name="stackPanel1" VerticalAlignment="Stretch" Width="504" Orientation="Horizontal">
-        <Button Content="Edit" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="editButton" Click="editButton_Click" />
-        <Button Content="New Genre" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="newGenreButton" Click="newGenreButton_Click" />
-        <Button Content="Delete" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="deleteButton" Click="deleteButton_Click" />
-        <Button Content="Add" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="addButton" Click="addButton_Click" />
+        <Button Content="Edit" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="editButton" Click="EditButtonClick" />
+        <Button Content="New Genre" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="newGenreButton" Click="NewGenreButtonClick" />
+        <Button Content="Delete" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="deleteButton" Click="DeleteButtonClick" />
+        <Button Content="Add" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="addButton" Click="AddButtonClick" />
     </StackPanel>
 
 </Window>

@@ -17,44 +17,45 @@ namespace NuttinButCDs
     /// <summary>
     /// Interaction logic for AddCD.xaml
     /// </summary>
-    public partial class AddCD : Window
+    public partial class AddCd : Window
     {
         private MusicServiceSoapClient musicService = new MusicServiceSoapClient();
-        public AddCD()
+
+        public AddCd()
         {
             InitializeComponent();
         }
 
-        private void findItButton_Click(object sender, RoutedEventArgs e)
+        private void FindItButtonClick(object sender, RoutedEventArgs e)
         {
-            initiateFind();
+            InitiateFind();
             e.Handled = true;
         }
 
 
-        private void doItButton_Click(object sender, RoutedEventArgs e)
+        private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
         }
 
-        private void puntButton_Click(object sender, RoutedEventArgs e)
+        private void PuntButtonClick(object sender, RoutedEventArgs e)
         {
             this.Close();
             e.Handled = true; // is this needed?
         }
 
-        private void editArtistTextBox_KeyUp(object sender, KeyEventArgs e)
+        private void EditArtistTextBoxKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter)
             {
                 return;
             }
 
-            initiateFind();
+            InitiateFind();
             e.Handled = true;
         }
 
-        private void initiateFind()
+        private void InitiateFind()
         {
             if (!string.IsNullOrEmpty(editArtistTextBox.Text))
             {
@@ -62,11 +63,11 @@ namespace NuttinButCDs
                 puntButton.IsEnabled   = false;
                 doItButton.IsEnabled   = false;
                 musicService.FindAlbumsByArtistAsync(editArtistTextBox.Text);
-                musicService.FindAlbumsByArtistCompleted += musicService_FindAlbumsByArtistCompleted;
+                musicService.FindAlbumsByArtistCompleted += MusicServiceFindAlbumsByArtistCompleted;
             }
         }
 
-        private void musicService_FindAlbumsByArtistCompleted(object sender, FindAlbumsByArtistCompletedEventArgs e)
+        private void MusicServiceFindAlbumsByArtistCompleted(object sender, FindAlbumsByArtistCompletedEventArgs e)
         {
             findItButton.IsEnabled = true;
             puntButton.IsEnabled   = true;
