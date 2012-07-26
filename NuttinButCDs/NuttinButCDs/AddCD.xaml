@@ -5,8 +5,8 @@
     <Window.Resources>
         <DataTemplate x:Key="FoundAlbumsDataTemplate">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding SmallImageUrl}" Margin="5"></Image>
-                <TextBlock Text="{Binding Title}" ></TextBlock>
+                <Image Source="{Binding SmallImageUrl}" Margin="5" Width="40" Height="40"></Image>
+                <TextBlock Text="{Binding Title}" VerticalAlignment="Center"></TextBlock>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
@@ -30,7 +30,7 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="1" Grid.Column="0" Content="Artist:" HorizontalAlignment="Left" Name="editArtistLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="23" HorizontalAlignment="Stretch" Name="editArtistTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" />
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="23" HorizontalAlignment="Stretch" Name="editArtistTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" KeyUp="editArtistTextBox_KeyUp" />
         <ListBox Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="4" Height="Auto" HorizontalAlignment="Stretch" Name="albumListBox" VerticalAlignment="Stretch" Width="Auto" Margin="10,0" 
                  ItemTemplate="{StaticResource FoundAlbumsDataTemplate}"/>
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" HorizontalAlignment="Right" Name="buttonStackPanel1" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">

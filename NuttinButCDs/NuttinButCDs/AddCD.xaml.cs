@@ -27,11 +27,40 @@ namespace NuttinButCDs
 
         private void findItButton_Click(object sender, RoutedEventArgs e)
         {
+            initiateFind();
+            e.Handled = true;
+        }
+
+
+        private void doItButton_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void puntButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            e.Handled = true; // is this needed?
+        }
+
+        private void editArtistTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter)
+            {
+                return;
+            }
+
+            initiateFind();
+            e.Handled = true;
+        }
+
+        private void initiateFind()
+        {
             if (!string.IsNullOrEmpty(editArtistTextBox.Text))
             {
                 findItButton.IsEnabled = false;
-                puntButton.IsEnabled = false;
-                doItButton.IsEnabled = false;
+                puntButton.IsEnabled   = false;
+                doItButton.IsEnabled   = false;
                 musicService.FindAlbumsByArtistAsync(editArtistTextBox.Text);
                 musicService.FindAlbumsByArtistCompleted += musicService_FindAlbumsByArtistCompleted;
             }
@@ -40,23 +69,15 @@ namespace NuttinButCDs
         private void musicService_FindAlbumsByArtistCompleted(object sender, FindAlbumsByArtistCompletedEventArgs e)
         {
             findItButton.IsEnabled = true;
-            puntButton.IsEnabled = true;
-            doItButton.IsEnabled = true;
+            puntButton.IsEnabled   = true;
+            doItButton.IsEnabled   = true;
             if (e.Error != null)
+            {
                 return;
+            }
             //BusyProgressBar.Visibility = Visibility.Collapsed;
 
             albumListBox.ItemsSource = e.Result;
-        }
-
-        private void doItButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void puntButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }
