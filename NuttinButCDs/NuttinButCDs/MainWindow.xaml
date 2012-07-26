@@ -1,0 +1,15 @@
+﻿<Window x:Class="NuttinButCDs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" Background="Cornsilk">
+    <Window.Resources>       
+    </Window.Resources>
+
+    <StackPanel Height="312" HorizontalAlignment="Stretch" Name="stackPanel1" VerticalAlignment="Stretch" Width="504" Orientation="Horizontal">
+        <Button Content="Edit" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="editButton" Click="editButton_Click" />
+        <Button Content="New Genre" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="newGenreButton" Click="newGenreButton_Click" />
+        <Button Content="Delete" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="deleteButton" Click="deleteButton_Click" />
+        <Button Content="Add" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="addButton" Click="addButton_Click" />
+    </StackPanel>
+
+</Window>

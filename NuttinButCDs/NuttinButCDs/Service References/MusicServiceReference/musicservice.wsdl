@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://musicservice.xpdt.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://musicservice.xpdt.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://musicservice.xpdt.com/">
+      <s:element name="FindAlbumsByArtist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="artist" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FindAlbumsByArtistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindAlbumsByArtistResult" type="tns:ArrayOfAlbum" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAlbum">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Album" nillable="true" type="tns:Album" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Album">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Artist" type="tns:Artist" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReleaseDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LargeImageUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SmallImageUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfDiscs" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Disks" type="tns:ArrayOfDisk" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Artist">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDisk">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Disk" nillable="true" type="tns:Disk" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Disk">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tracks" type="tns:ArrayOfTrack" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTrack">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Track" nillable="true" type="tns:Track" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Track">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Index" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FindAlbumsByArtistSoapIn">
+    <wsdl:part name="parameters" element="tns:FindAlbumsByArtist" />
+  </wsdl:message>
+  <wsdl:message name="FindAlbumsByArtistSoapOut">
+    <wsdl:part name="parameters" element="tns:FindAlbumsByArtistResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MusicServiceSoap">
+    <wsdl:operation name="FindAlbumsByArtist">
+      <wsdl:input message="tns:FindAlbumsByArtistSoapIn" />
+      <wsdl:output message="tns:FindAlbumsByArtistSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MusicServiceSoap" type="tns:MusicServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindAlbumsByArtist">
+      <soap:operation soapAction="http://musicservice.xpdt.com/FindAlbumsByArtist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MusicServiceSoap12" type="tns:MusicServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindAlbumsByArtist">
+      <soap12:operation soapAction="http://musicservice.xpdt.com/FindAlbumsByArtist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MusicService">
+    <wsdl:port name="MusicServiceSoap" binding="tns:MusicServiceSoap">
+      <soap:address location="http://www.xpdreamteam.com/musicservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MusicServiceSoap12" binding="tns:MusicServiceSoap12">
+      <soap12:address location="http://www.xpdreamteam.com/musicservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
