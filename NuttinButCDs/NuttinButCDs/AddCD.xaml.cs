@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using NuttinButCDs.MusicServiceReference;
+using System.Collections.ObjectModel;
 
 namespace NuttinButCDs
 {
@@ -20,10 +21,13 @@ namespace NuttinButCDs
     public partial class AddCd : Window
     {
         private MusicServiceSoapClient musicService = new MusicServiceSoapClient();
+        private List<MusicServiceReference.Album> foundAlbums = new List<MusicServiceReference.Album>();
 
         public AddCd()
         {
             InitializeComponent();
+            foundAlbums.Clear();
+            editArtistTextBox.Text = "Queen";
         }
 
         private void FindItButtonClick(object sender, RoutedEventArgs e)
@@ -32,9 +36,35 @@ namespace NuttinButCDs
             e.Handled = true;
         }
 
+                //public Album(string albumName,
+                //     string artistName,
+                //     string genre,
+                //     int    year,
+                //     int    rating,
+                //     string comment,
+                //     Uri    albumImage,
+                //     ObservableCollection<string> songs)
 
         private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
+            MusicServiceReference.Album alb = (MusicServiceReference.Album)albumListBox.SelectedItem;
+            ObservableCollection<string> songs = new ObservableCollection<string>();
+
+            // you can always tell an old Fortran programmer...
+            for (int i = 0; i < alb.Disks.Count(); i++)
+            {
+                for (int j = 0; j < alb.Disks[i].Tracks.Count(); j++)
+                    songs.Add(alb.Disks[i].Tracks[j].Title);
+            }
+            
+            Album newAlbum = new Album(alb.Title,
+                                       alb.Artist.Name,
+                                       null,
+                                       alb.ReleaseDate.Year,
+                                       0, null,
+                                       new Uri(alb.SmallImageUrl), 
+                                       songs);
+            MainWindow.MyAlbums.AddAlbumToCollection(newAlbum);
             e.Handled = true;
         }
 
@@ -78,6 +108,8 @@ namespace NuttinButCDs
             }
             //BusyProgressBar.Visibility = Visibility.Collapsed;
 
+            foundAlbums.Clear();
+            foundAlbums = e.Result.ToList();
             albumListBox.ItemsSource = e.Result;
         }
     }

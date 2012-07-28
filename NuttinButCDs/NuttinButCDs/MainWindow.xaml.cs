@@ -19,6 +19,8 @@ namespace NuttinButCDs
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static AlbumCollection MyAlbums = new AlbumCollection();
+
         public MainWindow()
         {
             InitializeComponent();

@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace NuttinButCDs
 {
-    class Album
+    public class Album
     {
         private string _albumName;
         private string _artistName;
@@ -52,7 +52,8 @@ namespace NuttinButCDs
             get { return _rating; }
             set
             {
-                if (_rating >= 1 && _rating <= 4)
+                // 0 rating indicates no opinion
+                if (_rating >= 0 && _rating <= 4)
                 {
                  _rating = value;
                 }
@@ -95,7 +96,7 @@ namespace NuttinButCDs
             Year = year;
             Rating = rating;
             Comment = comment;
-            AlbumImage = _albumImage;
+            AlbumImage = albumImage;
             Songs = songs;
         }
     }
