@@ -22,5 +22,38 @@ namespace NuttinButCDs
         {
             InitializeComponent();
         }
+
+        private void EditGenreTextBoxKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter)
+            {
+                return;
+            }
+
+            AddGenre();
+            e.Handled = true;
+        }
+
+        private void DoItButtonClick(object sender, RoutedEventArgs e)
+        {
+            AddGenre();
+            e.Handled = true;
+        }
+
+        private void PuntButtonClick(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true; // is this needed before a Close?
+            this.Close();
+        }
+
+        private bool AddGenre()
+        {
+            if (!string.IsNullOrEmpty(editGenreTextBox.Text))
+            {
+                MainWindow.Genres.Add(editGenreTextBox.Text);
+                MainWindow.Genres.Sort();
+            }
+            return true;
+        }
     }
 }
