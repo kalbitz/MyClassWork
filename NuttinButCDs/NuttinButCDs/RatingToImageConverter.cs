@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Data;
+using NuttinButCDs.Properties;
 
 namespace NuttinButCDs
 {
@@ -11,36 +12,36 @@ namespace NuttinButCDs
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            int rating = (int) value;
-            Image ratingImage = new Image();
+            int rating = (int)value;
+
             switch (rating)
             {
                 case 0:
-                {
-                    return ratingImage;
-                }
+                    {
+                        return null;
+                    }
                 case 1:
-                {
-                    ratingImage.FindResource("oneStar");
-                    return ratingImage;
-                }
+                    {
+                        return System.Windows.Application.Current.TryFindResource("oneStar");
+                    }
                 case 2:
-                {
-                    ratingImage.FindResource("twoStar");
-                    return ratingImage;
-                }
+                    {
+                        return System.Windows.Application.Current.TryFindResource("twoStar");
+                    }
                 case 3:
-                {
-                    ratingImage.FindResource("threeStar");
-                    return ratingImage;
-                }
+                    {
+                        return System.Windows.Application.Current.TryFindResource("threeStar");
+                    }
                 case 4:
-                {
-                    ratingImage.FindResource("fourStar");
-                    return ratingImage;
-                }
-            } ;
-            return ratingImage;
+                    {
+                        return System.Windows.Application.Current.TryFindResource("fourStar");
+                    }
+                default:
+                    {
+                        return null;
+                    }
+            };
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
