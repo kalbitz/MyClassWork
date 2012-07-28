@@ -27,7 +27,7 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             foundAlbums.Clear();
-            editArtistTextBox.Text = "Queen";
+            editArtistTextBox.Text = "Queen";  // TEMPORARY
         }
 
         private void FindItButtonClick(object sender, RoutedEventArgs e)
@@ -40,6 +40,11 @@ namespace NuttinButCDs
         {
             MusicServiceReference.Album alb = (MusicServiceReference.Album)albumListBox.SelectedItem;
             ObservableCollection<string> songs = new ObservableCollection<string>();
+
+            if (alb == null)
+            {
+                return;
+            }
 
             // you can always tell who learned to program in Fortran...
             for (int i = 0; i < alb.Disks.Count(); i++)
