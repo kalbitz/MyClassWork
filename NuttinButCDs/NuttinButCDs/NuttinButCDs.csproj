@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="Album.cs" />
     <Compile Include="AlbumCollection.cs" />
+    <Compile Include="RatingToImageConverter.cs" />
     <Compile Include="Service References\MusicServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

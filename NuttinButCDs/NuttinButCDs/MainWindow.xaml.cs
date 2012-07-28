@@ -27,6 +27,7 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             Genres.Sort();
+            albumListView.ItemsSource = MyAlbums.Albums;
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -55,7 +56,13 @@ namespace NuttinButCDs
 
         private void AboutButtonClick(object sender, RoutedEventArgs e)
         {
+            About about = new About();
+            about.ShowDialog();
+        }
 
+        private void CloseButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

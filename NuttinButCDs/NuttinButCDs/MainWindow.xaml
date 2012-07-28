@@ -1,15 +1,43 @@
 ﻿<Window x:Class="NuttinButCDs.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525" Background="Cornsilk">
-    <Window.Resources>       
+        xmlns:my="clr-namespace:NuttinButCDs"
+        Title="Nuttin' But CDs" Height="350" Width="525" Background="Cornsilk">
+    <Window.Resources>
+        <my:RatingToImageConverter x:Key="RatingToImageConverter1" />
     </Window.Resources>
+    <DockPanel  x:Name="MainDock">     
+        <ToolBar DockPanel.Dock ="Top" Height="26" Name="toolBar1" Background="Cornsilk">
+            <Button Content="Add" x:Name="AddButton" Click="AddButtonClick" Margin="5,0,0,0" />
+            <Button Content="Edit" x:Name="EditButton" Click="EditButtonClick" Margin="7,0,0,0" />
+            <Button Content="New Genre" x:Name="NewGenreButton" Click="NewGenreButtonClick" Margin="7,0,0,0" />
+            <Separator Margin="7,0,0,0" />
+            <TextBlock Name="SortByLabel" Text="Sort by" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7,0,0,0" />
+            <ComboBox Name="sortByComboBox" Height="26" Width="80" Margin="5,0,0,0" />
+            <Button Content="About" x:Name="AboutButton" Click="AboutButtonClick" Margin="7,0,0,0" />
+            <Button Content="Close"  Command="Close" x:Name="CloseButton" IsCancel="True" Margin="7,0,0,0" Click="CloseButtonClick" />            
+        </ToolBar>
+        <ListView Background="Cornsilk" Name="albumListView" >
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Album Name" DisplayMemberBinding="{Binding Path=AlbumName}" />
+                        <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=ArtistName}" />
+                        <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Path=Genre}" />
+                        <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Path=Year}" />
+                        <GridViewColumn Header="Rating">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=Rating, Converter={StaticResource RatingToImageConverter1}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Comment" DisplayMemberBinding="{Binding Path=Comment}" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
 
-    <StackPanel Height="312" HorizontalAlignment="Stretch" Name="stackPanel1" VerticalAlignment="Stretch" Width="504" Orientation="Horizontal">
-        <Button Content="Edit" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="editButton" Click="EditButtonClick" />
-        <Button Content="New Genre" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="newGenreButton" Click="NewGenreButtonClick" />
-        <Button Content="Delete" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="deleteButton" Click="DeleteButtonClick" />
-        <Button Content="Add" Height="40" Style="{DynamicResource ButtonStyleYellowGradient}" Width="100" Name="addButton" Click="AddButtonClick" />
-    </StackPanel>
 
 </Window>
