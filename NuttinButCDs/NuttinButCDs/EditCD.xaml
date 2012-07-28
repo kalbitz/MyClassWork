@@ -1,7 +1,7 @@
 ﻿<Window x:Class="NuttinButCDs.EditCD"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Edit CD" Height="415" Width="390" MinWidth="340" MinHeight="310" Background="Cornsilk" Name="editCDWindow">
+        Title="Edit CD" Height="415" Width="390" MinWidth="340" MinHeight="310" Background="Cornsilk" Name="editCDWindow" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
