@@ -22,7 +22,7 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             aboutTextBlock.Text =
-                "Brought to you by: Katherine R. Albitz\n" +
+                "Brought to you by: Katherine R. Albitz\n\n" +
                 "Special Features:\n" +
                 "In Add CDs, the Artist name text box activates Find It on return."
                 ;
