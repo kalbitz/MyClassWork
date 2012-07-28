@@ -21,6 +21,17 @@ namespace NuttinButCDs
         public About()
         {
             InitializeComponent();
+            aboutTextBlock.Text =
+                "Brought to you by: Katherine R. Albitz\n" +
+                "Special Features:\n" +
+                "In Add CDs, the Artist name text box activates Find It on return."
+                ;
+        }
+
+        private void DoneButtonClick(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true; // is this needed before a Close?
+            this.Close();
         }
     }
 }
