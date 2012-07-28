@@ -40,7 +40,7 @@ namespace NuttinButCDs
             get { return _year; }
             set
             {
-                if (_year >= 1900 && _year <= DateTime.Now.Year)
+                if (value >= 1900 && value <= DateTime.Now.Year)
                 {
                      _year = value;
                 }
@@ -53,7 +53,7 @@ namespace NuttinButCDs
             set
             {
                 // 0 rating indicates no opinion
-                if (_rating >= 0 && _rating <= 4)
+                if (value >= 0 && value <= 4)
                 {
                  _rating = value;
                 }
