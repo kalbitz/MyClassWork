@@ -22,5 +22,16 @@ namespace NuttinButCDs
         {
             InitializeComponent();
         }
+
+        private void DoItButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PuntButtonClick(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true; // is this needed before a Close?
+            this.Close();
+        }
     }
 }
