@@ -20,10 +20,13 @@ namespace NuttinButCDs
     public partial class MainWindow : Window
     {
         public static AlbumCollection MyAlbums = new AlbumCollection();
+        public static List<string> Genres = new List<string>() {
+            "Rock", "Pop", "Classical", "Hip Hop", "Jazz", "Blues" };
 
         public MainWindow()
         {
             InitializeComponent();
+            Genres.Sort();
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -48,6 +51,11 @@ namespace NuttinButCDs
         {
             AddCd addCd = new AddCd();
             addCd.ShowDialog();
+        }
+
+        private void AboutButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
