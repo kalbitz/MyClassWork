@@ -36,21 +36,12 @@ namespace NuttinButCDs
             e.Handled = true;
         }
 
-                //public Album(string albumName,
-                //     string artistName,
-                //     string genre,
-                //     int    year,
-                //     int    rating,
-                //     string comment,
-                //     Uri    albumImage,
-                //     ObservableCollection<string> songs)
-
         private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
             MusicServiceReference.Album alb = (MusicServiceReference.Album)albumListBox.SelectedItem;
             ObservableCollection<string> songs = new ObservableCollection<string>();
 
-            // you can always tell an old Fortran programmer...
+            // you can always tell who learned to program in Fortran...
             for (int i = 0; i < alb.Disks.Count(); i++)
             {
                 for (int j = 0; j < alb.Disks[i].Tracks.Count(); j++)
@@ -70,8 +61,8 @@ namespace NuttinButCDs
 
         private void PuntButtonClick(object sender, RoutedEventArgs e)
         {
+            e.Handled = true; // is this needed before a Close?
             this.Close();
-            e.Handled = true; // is this needed?
         }
 
         private void EditArtistTextBoxKeyUp(object sender, KeyEventArgs e)
