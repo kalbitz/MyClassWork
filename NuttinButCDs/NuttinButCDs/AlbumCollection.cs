@@ -6,16 +6,8 @@ using System.Text;
 
 namespace NuttinButCDs
 {
-    public class AlbumCollection
+    public class AlbumCollection : ObservableCollection<Album>
     {
-        private ObservableCollection<Album> _albums = new ObservableCollection<Album>();
-
-        public ObservableCollection<Album> Albums
-        {
-            get { return _albums; }
-            set { _albums = value; }
-        }
-
         public AlbumCollection()
         {
             // TODO: Fill in from database
@@ -25,28 +17,32 @@ namespace NuttinButCDs
             songs.Add("Song 2");
             songs.Add("Song 3");
 
-            _albums.Add(new Album("Goodbye Yellowbrick Road", "Elton John", "Rock", 1972, 4, "Best EJ there is!", null, songs));
-            _albums.Add(new Album("Fat Bottom Girls", "Queen", "Rock", 1974, 3, "", null, songs));
-            _albums.Add(new Album("The White Album", "Beatles", "Pop", 1969, 0, "", null, null));
-            _albums.Add(new Album("21", "Adele", "R&B", 2012, 2, "Not as good as they say", null, songs));
+            Add(new Album("Goodbye Yellowbrick Road", "Elton John", "Rock", 1972, 4, "Best EJ there is!", null, songs));
+            Add(new Album("Fat Bottom Girls", "Queen", "Rock", 1974, 3, "", null, songs));
+            Add(new Album("The White Album", "Beatles", "Pop", 1969, 0, "", null, null));
+            Add(new Album("21", "Adele", "R&B", 2012, 2, "Not as good as they say", null, songs));
         }
 
-        public bool RemoveAlbumFromCollection(Album album)
+        public new bool Remove(Album album)
         {
             // TODO: remove from db too.
+            base.Remove(album);
             return false;
         }
 
-        public bool AddAlbumToCollection(Album album)
+        public new bool Add(Album album)
         {
             // TODO: add to DB too.
-            _albums.Add(album);
+            base.Add(album);
             return true;
         }
 
-        public bool UpdateAlbumInCollection(Album album)
+        public bool Update(Album oldAlbum, Album newAlbum)
         {
             // TODO: update in DB too.
+            Remove(oldAlbum);
+            Add(newAlbum);
+            
             return false;
         }
     }

@@ -27,13 +27,17 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             Genres.Sort();
-            albumListView.ItemsSource = MyAlbums.Albums;
+            albumListView.ItemsSource = MyAlbums;
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
         {
-            EditCD editCd = new EditCD();
-            editCd.ShowDialog();
+            Album album = (Album)albumListView.SelectedItems[0];
+            if (album != null)
+            {
+                EditCD editCd = new EditCD(album);
+                editCd.ShowDialog();
+            }
         }
 
         private void NewGenreButtonClick(object sender, RoutedEventArgs e)
@@ -77,6 +81,11 @@ namespace NuttinButCDs
                 Genres.Add(newGenre);
                 Genres.Sort();
             }
+        }
+
+        public static void UpdateAlbum(Album oldAlbum, Album newAlbum)
+        {
+            MyAlbums.Update(oldAlbum, newAlbum);
         }
     }
 }

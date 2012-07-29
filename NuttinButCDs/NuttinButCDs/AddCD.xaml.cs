@@ -61,7 +61,7 @@ namespace NuttinButCDs
                                        0, null,
                                        new Uri(alb.SmallImageUrl), 
                                        songs);
-            MainWindow.MyAlbums.AddAlbumToCollection(newAlbum);
+            MainWindow.MyAlbums.Add(newAlbum);
             e.Handled = true;
         }
 
