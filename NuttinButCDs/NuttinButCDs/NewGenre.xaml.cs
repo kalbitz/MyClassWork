@@ -43,7 +43,7 @@ namespace NuttinButCDs
 
         private void PuntButtonClick(object sender, RoutedEventArgs e)
         {
-            e.Handled = true; // is this needed before a Close?
+            e.Handled = true;
             this.Close();
         }
 

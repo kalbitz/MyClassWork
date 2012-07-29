@@ -33,13 +33,13 @@ namespace NuttinButCDs
         private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
             MainWindow.UpdateAlbum(oldAlbum, editableAlbum);
-            e.Handled = true; // is this needed before a Close?
+            e.Handled = true;
             this.Close();
         }
 
         private void PuntButtonClick(object sender, RoutedEventArgs e)
         {
-            e.Handled = true; // is this needed before a Close?
+            e.Handled = true;
             this.Close();
         }
     }

@@ -30,7 +30,7 @@ namespace NuttinButCDs
 
         private void DoneButtonClick(object sender, RoutedEventArgs e)
         {
-            e.Handled = true; // is this needed before a Close?
+            e.Handled = true;
             this.Close();
         }
     }
