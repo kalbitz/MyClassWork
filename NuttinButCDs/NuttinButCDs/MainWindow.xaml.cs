@@ -64,5 +64,19 @@ namespace NuttinButCDs
         {
             this.Close();
         }
+
+        private void CloseCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        public static void AddGenre(string newGenre)
+        {
+            if (!string.IsNullOrEmpty(newGenre))
+            {
+                Genres.Add(newGenre);
+                Genres.Sort();
+            }
+        }
     }
 }

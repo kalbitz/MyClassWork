@@ -6,16 +6,20 @@
     <Window.Resources>
         <my:RatingToImageConverter x:Key="RatingToImageConverter1" />
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="Close" CanExecute="CloseCanExecute" />
+    </Window.CommandBindings>
     <DockPanel  x:Name="MainDock">     
         <ToolBar DockPanel.Dock ="Top" Height="26" Name="toolBar1" Background="Cornsilk">
             <Button Content="Add" x:Name="AddButton" Click="AddButtonClick" Margin="5,0,0,0" />
+            <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButtonClick" Margin="5,0,0,0" />
             <Button Content="Edit" x:Name="EditButton" Click="EditButtonClick" Margin="7,0,0,0" />
             <Button Content="New Genre" x:Name="NewGenreButton" Click="NewGenreButtonClick" Margin="7,0,0,0" />
             <Separator Margin="7,0,0,0" />
             <TextBlock Name="SortByLabel" Text="Sort by" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="7,0,0,0" />
             <ComboBox Name="sortByComboBox" Height="26" Width="80" Margin="5,0,0,0" />
             <Button Content="About" x:Name="AboutButton" Click="AboutButtonClick" Margin="7,0,0,0" />
-            <Button Content="Close"  Command="Close" x:Name="CloseButton" IsCancel="True" Margin="7,0,0,0" Click="CloseButtonClick" />            
+            <Button Content="Close" x:Name="CloseButton" Margin="7,0,0,0" IsCancel="True" Click="CloseButtonClick" Command="ApplicationCommands.Close" />
         </ToolBar>
         <ListView Background="Cornsilk" Name="albumListView" SelectionMode="Single">
             <ListView.View>
