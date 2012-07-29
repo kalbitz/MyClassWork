@@ -4,7 +4,6 @@
         xmlns:my="clr-namespace:NuttinButCDs"
         Title="Nuttin' But CDs" Height="500" Width="650" Background="Cornsilk">
     <Window.Resources>
-        <my:RatingToImageConverter x:Key="RatingToImageConverter1" />
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Close" CanExecute="CloseCanExecute" />
