@@ -21,6 +21,7 @@ namespace NuttinButCDs
         public EditCD()
         {
             InitializeComponent();
+            editNameTextBox.Focus();
         }
     }
 }

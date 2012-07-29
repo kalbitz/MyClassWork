@@ -21,6 +21,7 @@ namespace NuttinButCDs
         public NewGenre()
         {
             InitializeComponent();
+            editGenreTextBox.Focus();
         }
 
         private void EditGenreTextBoxKeyUp(object sender, KeyEventArgs e)
@@ -50,10 +51,14 @@ namespace NuttinButCDs
         {
             if (!string.IsNullOrEmpty(editGenreTextBox.Text))
             {
-                MainWindow.Genres.Add(editGenreTextBox.Text);
-                MainWindow.Genres.Sort();
+                MainWindow.AddGenre(editGenreTextBox.Text);
+                this.Close();
+                return true;
             }
-            return true;
+            else
+            {
+                return false;
+            }
         }
     }
 }

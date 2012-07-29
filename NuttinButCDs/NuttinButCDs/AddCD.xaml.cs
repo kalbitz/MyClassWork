@@ -27,6 +27,7 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             foundAlbums.Clear();
+            editArtistTextBox.Focus();
             editArtistTextBox.Text = "Queen";  // TEMPORARY
         }
 
