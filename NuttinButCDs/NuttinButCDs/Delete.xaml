@@ -17,7 +17,7 @@
         <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Do you really want to delete the CD?" HorizontalAlignment="Left" Name="reallyDeleteLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <StackPanel Grid.ColumnSpan="3" Grid.Row="3" HorizontalAlignment="Right" Name="buttonStackPanel" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" />
-            <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
+            <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" IsDefault="True" />
         </StackPanel>
     </Grid>
 </Window>

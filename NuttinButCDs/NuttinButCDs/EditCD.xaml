@@ -65,7 +65,7 @@
         <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Height="23" HorizontalAlignment="Stretch" Name="editCommentTextBox" VerticalAlignment="Top" MinWidth="20" MinHeight="23" Margin="10,0" />
         <StackPanel Grid.ColumnSpan="3" Grid.Row="9" HorizontalAlignment="Right" Name="buttonStackPanel" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Add Genre" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Grid.Row="9" Name="addGenreButton" />
-            <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" />
+            <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" IsDefault="True" />
             <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" />
         </StackPanel>
         <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="3" Height="100" HorizontalAlignment="Center" Name="image1" Stretch="Fill" VerticalAlignment="Center" Width="100" />

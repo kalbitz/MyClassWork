@@ -43,7 +43,7 @@
                  ItemTemplate="{StaticResource FoundAlbumsDataTemplate}"/>
         <TextBlock Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="4" Margin="15,0" FontStyle="Italic" FontSize="14" Text="Ain't None!" Style="{StaticResource EmptyListTextBoxStyle}" Foreground="#FF277406" />
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" HorizontalAlignment="Right" Name="buttonStackPanel1" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
-            <Button Content="Find it!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="findItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="FindItButtonClick" />
+            <Button Content="Find it!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="findItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="FindItButtonClick" IsDefault="True" />
         </StackPanel>        
         <StackPanel Grid.ColumnSpan="3" Grid.Row="9" HorizontalAlignment="Right" Name="buttonStackPanel2" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Add'em!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" />
