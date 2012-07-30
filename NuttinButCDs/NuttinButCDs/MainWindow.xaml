@@ -24,6 +24,13 @@
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
+                        <GridViewColumn Header="Album Cover" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=AlbumImage}" Height="30" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="Album Name" DisplayMemberBinding="{Binding Path=AlbumName}" />
                         <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=ArtistName}" />
                         <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Path=Genre}" />
