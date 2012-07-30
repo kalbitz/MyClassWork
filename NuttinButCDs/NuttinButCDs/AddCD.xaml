@@ -46,7 +46,7 @@
             <Button Content="Find it!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="findItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="FindItButtonClick" IsDefault="True" />
         </StackPanel>        
         <StackPanel Grid.ColumnSpan="3" Grid.Row="9" HorizontalAlignment="Right" Name="buttonStackPanel2" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
-            <Button Content="Add'em!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" />
+            <Button Content="Add it!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" />
             <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
         </StackPanel>
     </Grid>

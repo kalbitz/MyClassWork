@@ -63,6 +63,9 @@ namespace NuttinButCDs
                                        songs);
             MainWindow.MyAlbums.Add(newAlbum);
             e.Handled = true;
+
+            // TODO: Give feedback and stay on page instead of closing
+            this.Close();
         }
 
         private void PuntButtonClick(object sender, RoutedEventArgs e)
