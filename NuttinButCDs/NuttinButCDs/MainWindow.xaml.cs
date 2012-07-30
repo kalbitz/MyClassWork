@@ -57,11 +57,7 @@ namespace NuttinButCDs
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
         {
-            if (albumListView.SelectedItems.Count > 0 && albumListView.SelectedItems[0] != null)
-            {
-                EditCD editCd = new EditCD((Album)albumListView.SelectedItems[0]);
-                editCd.ShowDialog();
-            }
+            EditAlbum(); 
         }
 
         private void NewGenreButtonClick(object sender, RoutedEventArgs e)
@@ -110,6 +106,20 @@ namespace NuttinButCDs
         public static void UpdateAlbum(Album oldAlbum, Album newAlbum)
         {
             MyAlbums.Update(oldAlbum, newAlbum);
+        }
+
+        private void AlbumListViewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EditAlbum(); 
+        }
+
+        private void EditAlbum()
+        {
+            if (albumListView.SelectedItems.Count > 0 && albumListView.SelectedItems[0] != null)
+            {
+                EditCD editCd = new EditCD((Album)albumListView.SelectedItems[0]);
+                editCd.ShowDialog();
+            }
         }
     }
 }
