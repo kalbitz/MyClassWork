@@ -19,6 +19,8 @@ namespace NuttinButCDs
     public partial class EditCD : Window
     {
         private List<int> _years;
+        private List<string> _genres;
+        private List<int> _ratings;
         private Album _editableAlbum;
         private Album oldAlbum;
 
@@ -34,10 +36,24 @@ namespace NuttinButCDs
             set { _years = value; }
         }
 
+        public List<string> Genres
+        {
+            get { return _genres; }
+            set { _genres = value; }
+        }
+
+        public List<int> Ratings
+        {
+            get { return _ratings; }
+            set { _ratings = value; }
+        }
+
         public EditCD(Album album)
         {
             InitializeComponent();
             _years = MainWindow.Years;
+            _genres = MainWindow.Genres;
+            _ratings = MainWindow.Ratings;
             editNameTextBox.Focus();
             EditableAlbum = album;
             oldAlbum = (Album)EditableAlbum.Clone();
@@ -47,13 +63,14 @@ namespace NuttinButCDs
 
         private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
-            MainWindow.UpdateAlbum(oldAlbum, EditableAlbum);
             e.Handled = true;
             this.Close();
         }
 
         private void PuntButtonClick(object sender, RoutedEventArgs e)
         {
+            // Restore old album
+            MainWindow.UpdateAlbum(EditableAlbum, oldAlbum);
             e.Handled = true;
             this.Close();
         }

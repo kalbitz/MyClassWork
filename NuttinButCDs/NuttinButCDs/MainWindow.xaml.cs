@@ -19,9 +19,9 @@ namespace NuttinButCDs
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static List<string> Genres = new List<string>() {
+        private static List<string> _genres = new List<string>() {
             "Rock", "Pop", "Classical", "Hip Hop", "Jazz", "Blues" };
-        public static List<int> Ratings = new List<int>() {0,1,2,3,4};
+        private static List<int> _ratings = new List<int>() {0,1,2,3,4};
         private static List<int> _years = new List<int>();
 
         public static AlbumCollection MyAlbums;
@@ -30,6 +30,18 @@ namespace NuttinButCDs
         {
             get { return _years; }
             set { _years = value; }
+        }
+
+        public static List<string> Genres
+        {
+            get { return _genres; }
+            set { _genres = value; }
+        }
+
+        public static List<int> Ratings
+        {
+            get { return _ratings; }
+            set { _ratings = value; }
         }
 
         public MainWindow()

@@ -17,8 +17,10 @@ namespace NuttinButCDs
             songs.Add("Song 2");
             songs.Add("Song 3");
 
+            Uri image = new Uri("http://ecx.images-amazon.com/images/I/61QzCwpt7mL._SL75_.jpg");
+
             Add(new Album("Goodbye Yellowbrick Road", "Elton John", "Rock", 1972, 4, "Best EJ there is!", null, songs));
-            Add(new Album("Fat Bottom Girls", "Queen", "Rock", 1974, 3, "", null, songs));
+            Add(new Album("Fat Bottom Girls", "Queen", "Rock", 1974, 3, "", image, songs));
             Add(new Album("The White Album", "Beatles", "Pop", 1969, 0, "", null, null));
             Add(new Album("21", "Adele", "R&B", 2012, 2, "Not as good as they say", null, songs));
         }
@@ -26,24 +28,20 @@ namespace NuttinButCDs
         public new bool Remove(Album album)
         {
             // TODO: remove from db too.
-            base.Remove(album);
-            return false;
+            return base.Remove(album);
         }
 
-        public new bool Add(Album album)
+        public new void Add(Album album)
         {
             // TODO: add to DB too.
             base.Add(album);
-            return true;
         }
 
-        public bool Update(Album oldAlbum, Album newAlbum)
+        public void Update(Album curAlbum, Album newAlbum)
         {
             // TODO: update in DB too.
-            Remove(oldAlbum);
+            Remove(curAlbum);
             Add(newAlbum);
-            
-            return false;
         }
     }
 }
