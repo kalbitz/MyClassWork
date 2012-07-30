@@ -62,7 +62,7 @@ namespace NuttinButCDs
             get { return _year; }
             set
             {
-                if (value >= 1900 && value <= DateTime.Now.Year)
+                if (value >= MainWindow.Years.First() && value <= MainWindow.Years.Last())
                 {
                     _year = value;
                 }

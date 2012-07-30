@@ -19,23 +19,35 @@ namespace NuttinButCDs
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static AlbumCollection MyAlbums = new AlbumCollection();
         public static List<string> Genres = new List<string>() {
             "Rock", "Pop", "Classical", "Hip Hop", "Jazz", "Blues" };
+        public static List<int> Ratings = new List<int>() {0,1,2,3,4};
+        private static List<int> _years = new List<int>();
+
+        public static AlbumCollection MyAlbums;
+
+        public static List<int> Years
+        {
+            get { return _years; }
+            set { _years = value; }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
             Genres.Sort();
+	
+            for (int year = 1900; year <= DateTime.Now.Year; year++) { _years.Add(year); }
+
+            MyAlbums = new AlbumCollection();
             albumListView.ItemsSource = MyAlbums;
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
         {
-            Album album = (Album)albumListView.SelectedItems[0];
-            if (album != null)
+            if (albumListView.SelectedItems.Count > 0 && albumListView.SelectedItems[0] != null)
             {
-                EditCD editCd = new EditCD(album);
+                EditCD editCd = new EditCD((Album)albumListView.SelectedItems[0]);
                 editCd.ShowDialog();
             }
         }

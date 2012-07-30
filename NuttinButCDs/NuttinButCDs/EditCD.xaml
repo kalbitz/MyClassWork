@@ -1,6 +1,7 @@
 ﻿<Window x:Class="NuttinButCDs.EditCD"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:NuttinButCDs"
         Title="Edit CD" Height="415" Width="390" MinWidth="340" MinHeight="310" Background="Cornsilk" Name="editCDWindow" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
@@ -22,13 +23,15 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="1" Grid.Column="0" Content="CD Name:" HorizontalAlignment="Left" Name="editNameLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AlbumName, Mode=TwoWay}" Height="23" HorizontalAlignment="Stretch" Name="editNameTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" />
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding EditableAlbum.AlbumName, Mode=TwoWay}" Height="23" HorizontalAlignment="Stretch" Name="editNameTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" />
         <Label Grid.Row="2" Grid.Column="0" Content="Artist:" HorizontalAlignment="Left" Name="editArtistLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ArtistName, Mode=TwoWay}" Height="23" HorizontalAlignment="Stretch" Name="editArtistTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" />
         <Label Grid.Row="3" Grid.Column="0" Content="Year:" HorizontalAlignment="Left" Name="editYearLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <ComboBox Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Name="yearComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" Background="White" >
-            
-        </ComboBox>
+        <ComboBox Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Name="yearComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" Background="White"
+            ItemsSource="{Binding Years}" 
+            SelectedValue="{Binding EditableAlbum.Year}"
+        />
+        
         <Label Grid.Row="4" Grid.Column="0" Content="Rating:" HorizontalAlignment="Left" Name="editRatingLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <ComboBox Grid.Column="1" Grid.Row="4" Height="23" HorizontalAlignment="Left" Name="ratingComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" IsReadOnly="True" Background="White">
             <DataTemplate>

@@ -18,21 +18,36 @@ namespace NuttinButCDs
     /// </summary>
     public partial class EditCD : Window
     {
-        private Album editableAlbum;
+        private List<int> _years;
+        private Album _editableAlbum;
         private Album oldAlbum;
+
+        public Album EditableAlbum
+        {
+            get { return _editableAlbum; }
+            set { _editableAlbum = value; }
+        }
+
+        public List<int> Years
+        {
+            get { return _years; }
+            set { _years = value; }
+        }
 
         public EditCD(Album album)
         {
             InitializeComponent();
+            _years = MainWindow.Years;
             editNameTextBox.Focus();
-            editableAlbum = album;
-            oldAlbum = (Album)editableAlbum.Clone();
-            DataContext = editableAlbum;
+            EditableAlbum = album;
+            oldAlbum = (Album)EditableAlbum.Clone();
+            DataContext = this;
         }
+
 
         private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
-            MainWindow.UpdateAlbum(oldAlbum, editableAlbum);
+            MainWindow.UpdateAlbum(oldAlbum, EditableAlbum);
             e.Handled = true;
             this.Close();
         }
