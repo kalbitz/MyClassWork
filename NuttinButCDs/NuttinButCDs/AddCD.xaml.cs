@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using NuttinButCDs.MusicServiceReference;
 using System.Collections.ObjectModel;
@@ -22,11 +23,17 @@ namespace NuttinButCDs
     {
         private MusicServiceSoapClient musicService = new MusicServiceSoapClient();
         private List<MusicServiceReference.Album> foundAlbums = new List<MusicServiceReference.Album>();
+        private Storyboard metronome;
 
         public AddCd()
         {
             InitializeComponent();
+
+            metronome = (Storyboard)FindResource("Metronome");
+            MetronomeGrid.Visibility = System.Windows.Visibility.Collapsed;
+
             foundAlbums.Clear();
+
             editArtistTextBox.Focus();
             editArtistTextBox.Text = "Queen";  // TEMPORARY
         }
@@ -92,6 +99,10 @@ namespace NuttinButCDs
                 findItButton.IsEnabled = false;
                 puntButton.IsEnabled   = false;
                 doItButton.IsEnabled   = false;
+
+                metronome.Begin();
+                MetronomeGrid.Visibility = System.Windows.Visibility.Visible;
+
                 musicService.FindAlbumsByArtistAsync(editArtistTextBox.Text);
                 musicService.FindAlbumsByArtistCompleted += MusicServiceFindAlbumsByArtistCompleted;
             }
@@ -99,14 +110,17 @@ namespace NuttinButCDs
 
         private void MusicServiceFindAlbumsByArtistCompleted(object sender, FindAlbumsByArtistCompletedEventArgs e)
         {
+            MetronomeGrid.Visibility = System.Windows.Visibility.Collapsed;
+            metronome.Stop();
+
             findItButton.IsEnabled = true;
             puntButton.IsEnabled   = true;
             doItButton.IsEnabled   = true;
+
             if (e.Error != null)
             {
                 return;
             }
-            //BusyProgressBar.Visibility = Visibility.Collapsed;
 
             foundAlbums.Clear();
             foundAlbums = e.Result.ToList();

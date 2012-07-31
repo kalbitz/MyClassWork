@@ -17,7 +17,17 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Storyboard x:Key="Metronome" AutoReverse="True" RepeatBehavior="Forever">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="path">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="32.672"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
+	<Window.Triggers>
+		<!--<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource Metronome}"/>
+		</EventTrigger>-->
+	</Window.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
@@ -49,5 +59,25 @@
             <Button Content="Add it!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" />
             <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
         </StackPanel>
+        <Grid x:Name="MetronomeGrid" Grid.Column="1" Margin="55.25,-19.306,21.5,-15.473" Grid.Row="5" Grid.RowSpan="2" Visibility="Visible">
+        	<Path Data="M12.366145,0.5 L51.905277,0.5 51.907452,0.51177871 C51.933262,0.63384098 51.962135,0.75482249 51.993992,0.87464488 L52.047878,1.0582896 51.646866,1.102987 63,102.9608 63,108.50045 0.5,108.50045 0.5,106.03272 12.386333,1.1866583 12.209895,1.1666558 12.312761,0.78115803 z" Margin="0,9.556,0,0" Stretch="Fill" Stroke="Black" Fill="#FF5C4A0A"/>
+        	<Path x:Name="path" Data="M4.7500006,3.8059998 L7.4999995,3.8059998 7.4999995,23.556 9.958571,23.556 9.9589705,23.557064 C9.9637203,23.568083 9.9690328,23.579004 9.974895,23.589823 L9.9848094,23.606401 9.9110231,23.610435 12,32.805893 12,33.306 7.4999995,33.306 7.4999995,76.056 4.7500006,76.056 4.7500006,33.306 0.5,33.306 0.5,33.083221 2.6870853,23.61799 2.6546208,23.616184 2.6735479,23.581383 2.6833711,23.556 4.7500006,23.556 z M6.0000001,0.5 L7.1249998,3.5 5.0000005,3.5 z" Margin="25.75,0,25.25,42" Stretch="Fill" Stroke="#FFD3B219" RenderTransformOrigin="0.48,1.006">
+        		<Path.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform/>
+        				<SkewTransform/>
+        				<RotateTransform Angle="-32.569"/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</Path.RenderTransform>
+        		<Path.Fill>
+        			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        				<GradientStop Color="#FFD3B219" Offset="0"/>
+        				<GradientStop Color="#FFEFE19F" Offset="1"/>
+        			</LinearGradientBrush>
+        		</Path.Fill>
+        	</Path>
+        	<Path Data="M5.9234192,0.5 L58.010292,0.5 63,45.266373 63,50.806 0.5,50.806 0.5,48.33828 z" Fill="#FF5C4A0A" Height="51.306" Stretch="Fill" Stroke="Black" VerticalAlignment="Bottom" />
+        </Grid>
     </Grid>
 </Window>
