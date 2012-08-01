@@ -27,7 +27,7 @@
                         <GridViewColumn Header="Album Cover" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Path=AlbumImage}" Height="30" />
+                                    <Image Source="{Binding Path=AlbumImage, Converter={StaticResource NullImageConverter}}" Height="30" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

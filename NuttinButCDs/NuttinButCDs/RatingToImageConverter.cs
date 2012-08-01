@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using NuttinButCDs.Properties;
@@ -16,10 +17,6 @@ namespace NuttinButCDs
 
             switch (rating)
             {
-                case 0:
-                    {
-                        return null;
-                    }
                 case 1:
                     {
                         return System.Windows.Application.Current.TryFindResource("oneStar");
@@ -36,9 +33,11 @@ namespace NuttinButCDs
                     {
                         return System.Windows.Application.Current.TryFindResource("fourStar");
                     }
+                case 0:
                 default:
                     {
-                        return null;
+                        //return System.Windows.Application.Current.TryFindResource("oneStar");   //TEMPORARY
+                        return DependencyProperty.UnsetValue;
                     }
             };
         }

@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:my="clr-namespace:NuttinButCDs">
     <my:RatingToImageConverter x:Key="RatingToImageConverter1" />
+    <my:NullImageConverter x:Key="NullImageConverter" />
     <Style x:Key="ButtonStyleYellowGradient" TargetType="{x:Type Button}">
 		<Setter Property="Template">
 			<Setter.Value>
