@@ -20,33 +20,31 @@
             <Button Content="About" x:Name="AboutButton" Click="AboutButtonClick" Margin="7,0,0,0" />
             <Button Content="Close" x:Name="CloseButton" Margin="7,0,0,0" IsCancel="True" Click="CloseButtonClick" Command="ApplicationCommands.Close" />
         </ToolBar>
-        <ListView Background="Cornsilk" Name="albumListView" SelectionMode="Single">
-            <ListView.View>
-                <GridView>
-                    <GridView.Columns>
-                        <GridViewColumn Header="Album Cover" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Path=AlbumImage, Converter={StaticResource NullImageConverter}}" Height="30" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Album Name" DisplayMemberBinding="{Binding Path=AlbumName}" />
-                        <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=ArtistName}" />
-                        <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Path=Genre}" />
-                        <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Path=Year}" />
-                        <GridViewColumn Header="Rating">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Path=Rating, Converter={StaticResource RatingToImageConverter1}}" Height="30" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Comment" DisplayMemberBinding="{Binding Path=Comment}" />
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView>
+
+        <DataGrid Background="Cornsilk" ItemsSource="MyAlbums" Name="albumListView" SelectionMode="Single" GridLinesVisibility="Horizontal" RowBackground="Cornsilk" DataContext="{Binding}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Album Cover" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=AlbumImage, Converter={StaticResource NullImageConverter}}" Height="30" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Path=AlbumName, Mode=OneWay}" Header="Album Name" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Path=ArtistName, Mode=OneWay}" Header="Artist" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Path=Genre, Mode=OneWay}" Header="Genre" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Path=Year, Mode=OneWay}" Header="Year" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Rating" IsReadOnly="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=Rating, Converter={StaticResource RatingToImageConverter1}}" Height="30" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Path=Comment, Mode=OneWay}" Header="Comment" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+
     </DockPanel>
 
 
