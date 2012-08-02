@@ -52,7 +52,7 @@ namespace NuttinButCDs
             for (int year = 1900; year <= DateTime.Now.Year; year++) { _years.Add(year); }
 
             MyAlbums = new AlbumCollection();
-            albumListView.ItemsSource = MyAlbums;
+            albumDataGrid.ItemsSource = MyAlbums;
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -115,9 +115,9 @@ namespace NuttinButCDs
 
         private void EditAlbum()
         {
-            if (albumListView.SelectedItems.Count > 0 && albumListView.SelectedItems[0] != null)
+            if (albumDataGrid.SelectedItems.Count > 0 && albumDataGrid.SelectedItems[0] != null)
             {
-                EditCD editCd = new EditCD((Album)albumListView.SelectedItems[0]);
+                EditCD editCd = new EditCD((Album)albumDataGrid.SelectedItems[0]);
                 editCd.ShowDialog();
             }
         }

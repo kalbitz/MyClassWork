@@ -4,6 +4,22 @@
         xmlns:my="clr-namespace:NuttinButCDs"
         Title="Nuttin' But CDs" Height="500" Width="650" Background="Cornsilk">
     <Window.Resources>
+        <Style TargetType="ListBox" x:Key="ListStyleIfEmpty">
+            <Style.Triggers>
+                <DataTrigger 
+            Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Items.Count}" 
+            Value="0"
+            >
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <TextBlock>No songs on this album! Bummer!</TextBlock>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="Close" CanExecute="CloseCanExecute" />
@@ -21,7 +37,7 @@
             <Button Content="Close" x:Name="CloseButton" Margin="7,0,0,0" IsCancel="True" Click="CloseButtonClick" Command="ApplicationCommands.Close" />
         </ToolBar>
 
-        <DataGrid Background="Cornsilk" ItemsSource="MyAlbums" Name="albumListView" SelectionMode="Single" GridLinesVisibility="Horizontal" RowBackground="Cornsilk" DataContext="{Binding}" AutoGenerateColumns="False">
+        <DataGrid Background="Cornsilk" ItemsSource="MyAlbums" Name="albumDataGrid" SelectionMode="Single" GridLinesVisibility="Horizontal" RowBackground="Cornsilk" DataContext="{Binding}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Album Cover" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
@@ -43,6 +59,13 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Path=Comment, Mode=OneWay}" Header="Comment" IsReadOnly="True" />
             </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border Margin="150,10" Padding="10" BorderBrush="Black" BorderThickness="3" CornerRadius="6">
+                        <ListBox Name="SongListBox" Style="{StaticResource ListStyleIfEmpty}" ItemsSource="{Binding Path=Songs}" Background="Cornsilk" />
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
 
     </DockPanel>

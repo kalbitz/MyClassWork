@@ -24,7 +24,8 @@ namespace NuttinButCDs
             aboutTextBlock.Text =
                 "Brought to you by: Katherine R. Albitz\n\n" +
                 "Special Features:\n" +
-                "In Add CDs, the Artist name text box activates Find It on return."
+                "In Add CDs, the Artist name text box activates Find It on return.\n" +
+                "If there are no songs, you get a special message in the DataGrid RowDetailsTemplate box."
                 ;
         }
 
