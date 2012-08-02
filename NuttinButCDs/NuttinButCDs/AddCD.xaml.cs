@@ -66,7 +66,8 @@ namespace NuttinButCDs
                                        null,
                                        alb.ReleaseDate.Year,
                                        0, null,
-                                       new Uri(alb.SmallImageUrl), 
+                                       new Uri(alb.SmallImageUrl),
+                                       new Uri(alb.LargeImageUrl), 
                                        songs);
             MainWindow.MyAlbums.Add(newAlbum);
             e.Handled = true;

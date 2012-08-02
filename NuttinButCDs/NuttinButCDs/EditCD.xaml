@@ -81,6 +81,6 @@
             <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" IsDefault="True" Click="DoItButtonClick" />
             <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
         </StackPanel>
-        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="3" Source="{Binding EditableAlbum.AlbumImage, Converter={StaticResource NullImageConverter}}" Margin="5" Width="100" Height="100" Name="albumImage" Stretch="Fill" VerticalAlignment="Center" />
+        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="3" Source="{Binding EditableAlbum.AlbumImageLarge, Converter={StaticResource NullImageConverter}}" Margin="5" Width="100" Height="100" Name="albumImage" Stretch="Fill" VerticalAlignment="Center" />
     </Grid>
 </Window>

@@ -19,10 +19,10 @@ namespace NuttinButCDs
 
             Uri image = new Uri("http://ecx.images-amazon.com/images/I/61QzCwpt7mL._SL75_.jpg");
 
-            Add(new Album("Goodbye Yellowbrick Road", "Elton John", "Rock", 1972, 4, "Best EJ there is!", null, songs));
-            Add(new Album("Fat Bottom Girls", "Queen", "Rock", 1974, 3, "", image, songs));
-            Add(new Album("The White Album", "Beatles", "Pop", 1969, 0, "", null, null));
-            Add(new Album("21", "Adele", "R&B", 2012, 2, "Not as good as they say", null, songs));
+            Add(new Album("Goodbye Yellowbrick Road", "Elton John", "Rock", 1972, 4, "Best EJ there is!", null, null, songs));
+            Add(new Album("Fat Bottom Girls", "Queen", "Rock", 1974, 3, "", image, image, songs));
+            Add(new Album("The White Album", "Beatles", "Pop", 1969, 0, "", null, null, null));
+            Add(new Album("21", "Adele", "R&B", 2012, 2, "Not as good as they say", null, null, songs));
         }
 
         public new bool Remove(Album album)

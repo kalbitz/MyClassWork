@@ -15,7 +15,8 @@ namespace NuttinButCDs
         private int _year;
         private int _rating;
         private string _comment;
-        private Uri _albumImage;
+        private Uri _albumImageSmall;
+        private Uri _albumImageLarge;
         private ObservableCollection<string> _songs = new ObservableCollection<string>();
 
         public string AlbumName
@@ -113,15 +114,28 @@ namespace NuttinButCDs
             }
         }
 
-        public Uri AlbumImage
+        public Uri AlbumImageSmall
         {
-            get { return _albumImage; }
+            get { return _albumImageSmall; }
             set
             {
-                _albumImage = value;
+                _albumImageSmall = value;
                 if (PropertyChanged != null)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs("AlbumImage"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("AlbumImageSmall"));
+                }
+            }
+        }
+
+        public Uri AlbumImageLarge
+        {
+            get { return _albumImageLarge; }
+            set
+            {
+                _albumImageLarge = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("AlbumImageLarge"));
                 }
             }
         }
@@ -139,6 +153,7 @@ namespace NuttinButCDs
             }
         }
 
+
         public Album()
         {
 
@@ -150,7 +165,8 @@ namespace NuttinButCDs
                      int year,
                      int rating,
                      string comment,
-                     Uri albumImage,
+                     Uri albumImageSmall,
+                     Uri albumImageLarge,
                      ObservableCollection<string> songs)
         {
             AlbumName = albumName;
@@ -159,7 +175,8 @@ namespace NuttinButCDs
             Year = year;
             Rating = rating;
             Comment = comment;
-            AlbumImage = albumImage;
+            AlbumImageSmall = albumImageSmall;
+            AlbumImageLarge = albumImageLarge;
             Songs = songs;
         }
 

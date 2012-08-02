@@ -48,6 +48,7 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             Genres.Sort();
+            LargeAlbumCover.Visibility = Visibility.Collapsed;
 	
             for (int year = 1900; year <= DateTime.Now.Year; year++) { _years.Add(year); }
 
@@ -120,6 +121,29 @@ namespace NuttinButCDs
                 EditCD editCd = new EditCD((Album)albumDataGrid.SelectedItems[0]);
                 editCd.ShowDialog();
             }
+        }
+
+        private void ImageMouseEnter(object sender, MouseEventArgs e)
+        {
+            if (albumDataGrid.SelectedItems.Count > 0 && albumDataGrid.SelectedItems[0] != null)
+            {
+                Album alb = (Album)albumDataGrid.SelectedItems[0];
+
+                BitmapImage bmi = new BitmapImage();
+                bmi.BeginInit();
+                bmi.UriSource =  alb.AlbumImageLarge;
+                bmi.EndInit();
+
+                LargeImage.Source = bmi;
+                LargeAlbumCover.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ImageMouseLeave(object sender, MouseEventArgs e)
+        {
+            // TODO: MouseLeave isn't a good way to do this because there
+            // are ways to not get MouseLeave... Need more robustness here.
+            LargeAlbumCover.Visibility = Visibility.Collapsed;
         }
     }
 }

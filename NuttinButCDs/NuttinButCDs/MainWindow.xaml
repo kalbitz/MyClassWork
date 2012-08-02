@@ -24,7 +24,8 @@
     <Window.CommandBindings>
         <CommandBinding Command="Close" CanExecute="CloseCanExecute" />
     </Window.CommandBindings>
-    <DockPanel  x:Name="MainDock">     
+    <Grid>
+    <DockPanel  x:Name="MainDock">
         <ToolBar DockPanel.Dock ="Top" Height="26" Name="toolBar1" Background="Cornsilk">
             <Button Content="Add" x:Name="AddButton" Click="AddButtonClick" Margin="5,0,0,0" />
             <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButtonClick" Margin="5,0,0,0" />
@@ -40,7 +41,7 @@
                 <DataGridTemplateColumn Header="Album Cover" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Path=AlbumImage, Converter={StaticResource NullImageConverter}}" Height="30" />
+                                <Image Source="{Binding Path=AlbumImageSmall, Converter={StaticResource NullImageConverter}}" Height="30" MouseEnter="ImageMouseEnter" MouseLeave="ImageMouseLeave" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -67,6 +68,11 @@
         </DataGrid>
 
     </DockPanel>
-
+    <Grid Name="LargeAlbumCover" >
+        <Border BorderThickness="5" Width="210" Height="210" BorderBrush="DarkGreen">
+            <Image Height="200" Width="200" Name="LargeImage" />
+        </Border>
+    </Grid>
+    </Grid>
 
 </Window>
