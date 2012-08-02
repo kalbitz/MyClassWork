@@ -74,6 +74,7 @@
 		<Setter Property="Foreground" Value="#FF277406"/>
 		<Setter Property="FontFamily" Value="Stencil Std"/>
 	</Style>
+    <ImageSource x:Key="noStar">Images/NoStar.png</ImageSource>
     <ImageSource x:Key="oneStar">Images/OneStar.png</ImageSource>
     <ImageSource x:Key="twoStar">Images/TwoStar.png</ImageSource>
     <ImageSource x:Key="threeStar">Images/ThreeStar.png</ImageSource>

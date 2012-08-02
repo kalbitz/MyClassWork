@@ -46,18 +46,28 @@
         <Label Grid.Row="4" Grid.Column="0" Content="Rating:" HorizontalAlignment="Left" Name="editRatingLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
 
         
-        <ComboBox Grid.Column="1" Grid.Row="4" Height="23" HorizontalAlignment="Left" Name="ratingComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" IsReadOnly="True" Background="White"
+        <!--<ComboBox Grid.Column="1" Grid.Row="4" Height="23" HorizontalAlignment="Left" Name="ratingComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" IsReadOnly="True" Background="White"
                   ItemsSource="{Binding Ratings, Converter={StaticResource RatingToImageConverter1}}" 
                   SelectedValue="{Binding EditableAlbum.Rating, Converter={StaticResource RatingToImageConverter1}}"
                    >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding Path=EditableAlbum.Rating, Converter={StaticResource RatingToImageConverter1}}" Height="30" />
+                    <Image Source="{Binding Path=Rating, Converter={StaticResource RatingToImageConverter1}}" Height="30" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-        </ComboBox>        
+        </ComboBox>-->
+        <ComboBox Grid.Column="1" Grid.Row="4" Height="23" HorizontalAlignment="Left" Name="ratingComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" IsReadOnly="True" Background="White"
+                  ItemsSource="{Binding RatingImages}" 
+                  SelectedValue="{Binding RatingImages[EditableAlbum.Rating]}"
+                   >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding Path=EditableAlbum.Rating}" Height="30" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
-        
+
         <Label Grid.Row="5" Grid.Column="0" Content="Genre:" HorizontalAlignment="Left" Name="editGenreLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <ComboBox Grid.Column="1" Grid.Row="5" Height="23" HorizontalAlignment="Left" Name="genreComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="True" Background="White" 
             ItemsSource="{Binding Genres}" 

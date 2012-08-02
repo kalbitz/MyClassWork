@@ -36,8 +36,7 @@ namespace NuttinButCDs
                 case 0:
                 default:
                     {
-                        //return System.Windows.Application.Current.TryFindResource("oneStar");   //TEMPORARY
-                        return DependencyProperty.UnsetValue;
+                        return System.Windows.Application.Current.TryFindResource("noStar");
                     }
             };
         }
