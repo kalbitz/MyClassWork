@@ -23,6 +23,11 @@ namespace NuttinButCDs
             get { return _albumName; }
             set
             {
+                if (String.IsNullOrEmpty(value))
+                {
+                    string errorMsg = "No album name??";
+                    throw new ApplicationException(errorMsg);
+                }
                 _albumName = value;
                 if (PropertyChanged != null)
                 {
@@ -36,6 +41,11 @@ namespace NuttinButCDs
             get { return _artistName; }
             set
             {
+                if (String.IsNullOrEmpty(value))
+                {
+                    string errorMsg = "Surely someone made this album!";
+                    throw new ApplicationException(errorMsg);
+                }
                 _artistName = value;
                 if (PropertyChanged != null)
                 {

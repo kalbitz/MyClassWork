@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:NuttinButCDs"
         Title="Edit CD" Height="415" Width="390" MinWidth="340" MinHeight="310" Background="Cornsilk" Name="editCDWindow" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
@@ -22,8 +24,18 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="1" Grid.Column="0" Content="CD Name:" HorizontalAlignment="Left" Name="editNameLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding EditableAlbum.AlbumName, Mode=TwoWay}" Height="23" HorizontalAlignment="Stretch" Name="editNameTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Album Name:" HorizontalAlignment="Left" Name="editNameLabel" VerticalAlignment="Center" Margin="5,0,0,0" Foreground="Black" />
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="23" HorizontalAlignment="Stretch" 
+                 Name="editNameTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" 
+                 Style="{StaticResource TextBoxEmptyError}" >
+            <TextBox.Text>
+                <Binding Path="EditableAlbum.AlbumName" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" >
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Grid.Row="2" Grid.Column="0" Content="Artist:" HorizontalAlignment="Left" Name="editArtistLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding EditableAlbum.ArtistName, Mode=TwoWay}" Height="23" HorizontalAlignment="Stretch" Name="editArtistTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" />
         <Label Grid.Row="3" Grid.Column="0" Content="Year:" HorizontalAlignment="Left" Name="editYearLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
@@ -31,25 +43,34 @@
             ItemsSource="{Binding Years}" 
             SelectedValue="{Binding EditableAlbum.Year}"
         />
-        
         <Label Grid.Row="4" Grid.Column="0" Content="Rating:" HorizontalAlignment="Left" Name="editRatingLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <ComboBox Grid.Column="1" Grid.Row="4" Height="23" HorizontalAlignment="Left" Name="ratingComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" IsReadOnly="True" Background="White">
-            <DataTemplate>
-                <Image Source="{Binding Path=Ratings, Converter={StaticResource RatingToImageConverter1}}" Height="30" />
-            </DataTemplate>
+
+        
+        <ComboBox Grid.Column="1" Grid.Row="4" Height="23" HorizontalAlignment="Left" Name="ratingComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" IsReadOnly="True" Background="White"
+                  ItemsSource="{Binding Ratings, Converter={StaticResource RatingToImageConverter1}}" 
+                  SelectedValue="{Binding EditableAlbum.Rating, Converter={StaticResource RatingToImageConverter1}}"
+                   >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding Path=EditableAlbum.Rating, Converter={StaticResource RatingToImageConverter1}}" Height="30" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>        
+
+        
         <Label Grid.Row="5" Grid.Column="0" Content="Genre:" HorizontalAlignment="Left" Name="editGenreLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <ComboBox Grid.Column="1" Grid.Row="5" Height="23" HorizontalAlignment="Left" Name="genreComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="True" Background="White" 
             ItemsSource="{Binding Genres}" 
             SelectedValue="{Binding EditableAlbum.Genre}"
         />
         <Label Grid.Row="6" Grid.Column="0" Content="Comment:" HorizontalAlignment="Left" Name="editCommentLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding EditableAlbum.Comment, Mode=TwoWay}" Height="23" HorizontalAlignment="Stretch" Name="editCommentTextBox" VerticalAlignment="Top" MinWidth="20" MinHeight="23" Margin="10,0" />
+        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"  Height="23" HorizontalAlignment="Stretch" 
+                 Name="editCommentTextBox" VerticalAlignment="Top" MinWidth="20" MinHeight="23" Margin="10,0" />
         <StackPanel Grid.ColumnSpan="3" Grid.Row="9" HorizontalAlignment="Right" Name="buttonStackPanel" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Add Genre" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Grid.Row="9" Name="addGenreButton" />
             <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" IsDefault="True" Click="DoItButtonClick" />
             <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
         </StackPanel>
-        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="3" Source="{Binding EditableAlbum.AlbumImage}" Margin="5" Width="100" Height="100" Name="albumImage" Stretch="Fill" VerticalAlignment="Center" />
+        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="3" Source="{Binding EditableAlbum.AlbumImage, Converter={StaticResource NullImageConverter}}" Margin="5" Width="100" Height="100" Name="albumImage" Stretch="Fill" VerticalAlignment="Center" />
     </Grid>
 </Window>
