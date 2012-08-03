@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -48,7 +49,7 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             Genres.Sort();
-            LargeAlbumCover.Visibility = Visibility.Collapsed;
+            LargeAlbumCover.Width = 0;
 	
             for (int year = 1900; year <= DateTime.Now.Year; year++) { _years.Add(year); }
 
@@ -135,7 +136,12 @@ namespace NuttinButCDs
                 bmi.EndInit();
 
                 LargeImage.Source = bmi;
-                LargeAlbumCover.Visibility = Visibility.Visible;
+
+                DoubleAnimation widthAnimation = new DoubleAnimation();
+                widthAnimation.From = 0;
+                widthAnimation.To = 210;
+                widthAnimation.Duration = TimeSpan.FromMilliseconds(300);
+                LargeAlbumCover.BeginAnimation(WidthProperty, widthAnimation);
             }
         }
 
@@ -143,7 +149,10 @@ namespace NuttinButCDs
         {
             // TODO: MouseLeave isn't a good way to do this because there
             // are ways to not get MouseLeave... Need more robustness here.
-            LargeAlbumCover.Visibility = Visibility.Collapsed;
+            DoubleAnimation widthAnimation = new DoubleAnimation();
+            widthAnimation.To = 0;
+            widthAnimation.Duration = TimeSpan.FromMilliseconds(300);
+            LargeAlbumCover.BeginAnimation(WidthProperty, widthAnimation);
         }
     }
 }
