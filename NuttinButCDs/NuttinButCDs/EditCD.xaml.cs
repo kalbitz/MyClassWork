@@ -87,5 +87,11 @@ namespace NuttinButCDs
             e.Handled = true;
             this.Close();
         }
+
+        private void AddGenreButtonClick(object sender, RoutedEventArgs e)
+        {
+            NewGenre newGenre = new NewGenre();
+            newGenre.ShowDialog();
+        }
     }
 }
