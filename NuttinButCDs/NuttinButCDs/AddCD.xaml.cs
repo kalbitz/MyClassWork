@@ -55,6 +55,7 @@ namespace NuttinButCDs
             }
 
             // you can always tell who learned to program in Fortran...
+            // TODO: separate into disks instead of lumping all songs together
             for (int i = 0; i < alb.Disks.Count(); i++)
             {
                 for (int j = 0; j < alb.Disks[i].Tracks.Count(); j++)
