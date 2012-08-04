@@ -69,7 +69,7 @@
 
     </DockPanel>
     <Grid Name="LargeAlbumCover" >
-        <Border BorderThickness="5" Width="210" Height="210" BorderBrush="DarkGreen">
+        <Border BorderThickness="5" Width="210" Height="210" BorderBrush="Sienna">
             <Image Height="200" Width="200" Name="LargeImage" />
         </Border>
     </Grid>
