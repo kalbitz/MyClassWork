@@ -138,7 +138,14 @@ namespace NuttinButCDs
 
         private void ImageMouseEnter(object sender, MouseEventArgs e)
         {
-            if (albumDataGrid.SelectedItems.Count > 0 && albumDataGrid.SelectedItems[0] != null)
+            // TODO: Is there a better way to test if hover sender is SelectedItem?
+            string sString = ((System.Windows.Controls.Image)sender).Source.ToString();
+            string aString = ((Album)albumDataGrid.SelectedItems[0]).AlbumImageSmall.OriginalString;
+
+            if (albumDataGrid.SelectedItems.Count > 0  &&
+                albumDataGrid.SelectedItems[0] != null &&
+                sString == aString                     &&   // is the sender the selected image?
+                ((Album)albumDataGrid.SelectedItems[0]).AlbumImageLarge != null)
             {
                 Album alb = (Album)albumDataGrid.SelectedItems[0];
 
@@ -152,18 +159,21 @@ namespace NuttinButCDs
                 DoubleAnimation widthAnimation = new DoubleAnimation();
                 widthAnimation.From = 0;
                 widthAnimation.To = 210;
-                widthAnimation.Duration = TimeSpan.FromMilliseconds(300);
+                widthAnimation.Duration = TimeSpan.FromMilliseconds(100);
                 LargeAlbumCover.BeginAnimation(WidthProperty, widthAnimation);
             }
         }
 
         private void ImageMouseLeave(object sender, MouseEventArgs e)
         {
-            // TODO: MouseLeave isn't a good way to do this because there
-            // are ways to not get MouseLeave... Need more robustness here.
+            // TODO: 
+            // MouseLeave isn't a good way to do this because there
+            // are ways to not get the MouseLeave event...
+            // Need more robustness here.
+
             DoubleAnimation widthAnimation = new DoubleAnimation();
             widthAnimation.To = 0;
-            widthAnimation.Duration = TimeSpan.FromMilliseconds(300);
+            widthAnimation.Duration = TimeSpan.FromMilliseconds(100);
             LargeAlbumCover.BeginAnimation(WidthProperty, widthAnimation);
         }
     }
