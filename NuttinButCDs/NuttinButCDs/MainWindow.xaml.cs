@@ -139,12 +139,13 @@ namespace NuttinButCDs
         private void ImageMouseEnter(object sender, MouseEventArgs e)
         {
             // TODO: Is there a better way to test if hover sender is SelectedItem?
-            string sString = ((System.Windows.Controls.Image)sender).Source.ToString();
-            string aString = ((Album)albumDataGrid.SelectedItems[0]).AlbumImageSmall.OriginalString;
+            //string sString = ((System.Windows.Controls.Image)sender).Source.ToString();
+            //string aString = ((Album)albumDataGrid.SelectedItems[0]).AlbumImageSmall.OriginalString;
 
             if (albumDataGrid.SelectedItems.Count > 0  &&
                 albumDataGrid.SelectedItems[0] != null &&
-                sString == aString                     &&   // is the sender the selected image?
+                // is the sender the selected image:
+                ((System.Windows.Controls.Image)sender).Source.ToString() == ((Album)albumDataGrid.SelectedItems[0]).AlbumImageSmall.OriginalString && 
                 ((Album)albumDataGrid.SelectedItems[0]).AlbumImageLarge != null)
             {
                 Album alb = (Album)albumDataGrid.SelectedItems[0];
