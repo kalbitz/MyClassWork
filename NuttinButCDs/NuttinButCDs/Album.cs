@@ -30,6 +30,11 @@ namespace NuttinButCDs
                     string errorMsg = "No album name??";
                     throw new ApplicationException(errorMsg);
                 }
+                else if (value.Length > 200)
+                {
+                    string errorMsg = "Too long!";
+                    throw new ApplicationException(errorMsg);
+                }
                 _albumName = value;
                 if (PropertyChanged != null)
                 {
@@ -66,6 +71,7 @@ namespace NuttinButCDs
             get { return _genre; }
             set
             {
+                // TODO: Validate
                 _genre = value;
                 if (PropertyChanged != null)
                 {
@@ -112,6 +118,7 @@ namespace NuttinButCDs
             get { return _comment; }
             set
             {
+                // TODO: Validate
                 _comment = value;
                 if (PropertyChanged != null)
                 {
@@ -125,6 +132,7 @@ namespace NuttinButCDs
             get { return _albumImageSmall; }
             set
             {
+                // TODO: Validate
                 _albumImageSmall = value;
                 if (PropertyChanged != null)
                 {
@@ -138,6 +146,7 @@ namespace NuttinButCDs
             get { return _albumImageLarge; }
             set
             {
+                // TODO: Validate
                 _albumImageLarge = value;
                 if (PropertyChanged != null)
                 {
