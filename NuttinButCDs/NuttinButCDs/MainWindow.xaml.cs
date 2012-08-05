@@ -13,6 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+/* TODO
+ * Pull out all hard-coded numbers and make them consts
+ * Better validation on stored data
+ * Handle multiple disks of songs better
+ * Disable buttons until they can be used (Add dialog, etc)
+ * Add tooltips
+ * 
+ * */
+
 namespace NuttinButCDs
 {
     /// <summary>
@@ -70,8 +79,11 @@ namespace NuttinButCDs
 
         private void DeleteButtonClick(object sender, RoutedEventArgs e)
         {
-            Delete delete = new Delete();
-            delete.ShowDialog();
+            if (albumDataGrid.SelectedItems.Count > 0 && albumDataGrid.SelectedItems[0] != null)
+            {
+                Delete delete = new Delete((Album)albumDataGrid.SelectedItems[0]);
+                delete.ShowDialog();
+            }
         }
 
         private void AddButtonClick(object sender, RoutedEventArgs e)
