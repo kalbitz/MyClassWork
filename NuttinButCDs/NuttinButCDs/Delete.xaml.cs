@@ -24,6 +24,7 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             _deletableAlbum = album;
+            deleteWindow.reallyDeleteTextBlock.Text = "Do you really want to delete\n" + album.AlbumName + "?";
         }
 
         private void DoItButtonClick(object sender, RoutedEventArgs e)
