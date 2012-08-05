@@ -4,11 +4,20 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace NuttinButCDs
 {
     public class AlbumCollection : ObservableCollection<Album>
     {
+        private NuttinButCDsDBDataSet CDsDataSet = new NuttinButCDsDBDataSet();
+        private DataTable albumDataTable = new DataTable("myAlbums");
+        private DataTable songDataTable = new DataTable("mySongs");
+        private NuttinButCDsDBDataSetTableAdapters.AlbumsTableAdapter albumsTableAdapter =
+            new NuttinButCDsDBDataSetTableAdapters.AlbumsTableAdapter();
+        private NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter songsTableAdapter =
+            new NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter();
+
         public static T ConvertFromDBVal<T>(object obj)
         {
             if (obj == null || obj == DBNull.Value)
@@ -38,37 +47,28 @@ namespace NuttinButCDs
             //Add(new Album("The White Album", "Beatles", "Pop", 1969, 0, "", null, null, null));
             //Add(new Album("21", "Adele", "R&B", 2012, 2, "Not as good as they say", null, null, songs));
 
-            // TODO: Presmuably there is a better way to fill the collection from the data in the db...
-
-            NuttinButCDsDBDataSet CDsDataSet = new NuttinButCDsDBDataSet();
-
-            NuttinButCDsDBDataSetTableAdapters.AlbumsTableAdapter albumsTableAdapter =
-                new NuttinButCDsDBDataSetTableAdapters.AlbumsTableAdapter();
-            NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter songsTableAdapter =
-                new NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter();
+            // TODO: Presmuably there is a better way to fill the collection from the db...
 
             albumsTableAdapter.Fill(CDsDataSet.Albums);
             songsTableAdapter.Fill(CDsDataSet.Songs);
 
-            DataTable albumDataTable = new DataTable("myAlbums");
             albumDataTable = albumsTableAdapter.GetData();
-
-            DataTable songDataTable = new DataTable("mySongs");
             songDataTable = songsTableAdapter.GetData();
 
-            System.Data.DataRowCollection albumRows = albumDataTable.Rows;
-            foreach (System.Data.DataRow aRow in albumRows)
+            DataRowCollection albumRows = albumDataTable.Rows;
+            foreach (DataRow aRow in albumRows)
             {
                 ObservableCollection<string> songs = new ObservableCollection<string>();
 
                 string expression = String.Format("AlbumID = {0}", (int)aRow["AlbumID"]);
-                System.Data.DataRow[] songRows = songDataTable.Select(expression);
+                DataRow[] songRows = songDataTable.Select(expression);
 
-                foreach (System.Data.DataRow sRow in songRows)
+                foreach (DataRow sRow in songRows)
                 {
                     songs.Add(ConvertFromDBVal<string>(sRow["SongName"]));
                 }
-                this.Add(new Album(
+                base.Add(new Album(
+                    (int)aRow["AlbumId"],
                     ConvertFromDBVal<string>(aRow["AlbumName"]),
                     ConvertFromDBVal<string>(aRow["ArtistName"]),
                     ConvertFromDBVal<string>(aRow["Genre"]),
@@ -91,6 +91,53 @@ namespace NuttinButCDs
         public new void Add(Album album)
         {
             // TODO: add to DB too.
+            NuttinButCDsDBDataSet.AlbumsRow newRow = CDsDataSet.Albums.NewAlbumsRow();
+
+            newRow.BeginEdit();
+            newRow["AlbumName"] = album.AlbumName;
+            newRow["ArtistName"] = album.ArtistName;
+            newRow["Genre"] = album.Genre;
+            newRow["Year"] = album.Year;
+            newRow["Rating"] = album.Rating;
+            newRow["Comment"] = album.Comment;
+            newRow["AlbumImageSmall"] = album.AlbumImageSmall.ToString();
+            newRow["AlbumImageLarge"] = album.AlbumImageLarge.ToString();
+            //newRow.RowState = DataRowState.Modified;
+            newRow.EndEdit();
+
+            //CDsDataSet.Albums.AddAlbumsRow(newRow);
+
+            CDsDataSet.Albums.Rows.Add(newRow);
+            CDsDataSet.Albums.AcceptChanges();
+
+            try
+            {
+                //this.Validate();
+                //this.customersBindingSource.EndEdit();
+                //this.customersTableAdapter.Update(this.northwindDataSet.Customers);
+                albumsTableAdapter.Update(CDsDataSet.Albums);
+                MessageBox.Show("Update successful");
+                albumsTableAdapter.Fill(CDsDataSet.Albums);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Update failed");
+            }
+
+            //album.AlbumId = (int)newRow["AlbumId"];
+            string expression = "AlbumName = " + "\'" + (string)newRow["AlbumName"] + "\'";
+            DataRow[] myRows = albumDataTable.Select(expression);
+            albumsTableAdapter.GetData();
+            DataRowCollection albumRows = albumDataTable.Rows;
+
+            //NorthwindDataSet.CustomersRow newCustomersRow =
+            //northwindDataSet1.Customers.NewCustomersRow();
+
+            //newCustomersRow.CustomerID = "ALFKI";
+            //newCustomersRow.CompanyName = "Alfreds Futterkiste";
+
+            //northwindDataSet1.Customers.Rows.Add(newCustomersRow);
+
             base.Add(album);
         }
 
