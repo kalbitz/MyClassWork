@@ -168,7 +168,7 @@ namespace NuttinButCDs
             }
         }
 
-        public int AlbumId
+        public int AlbumID
         {
             get { return _albumId; }
             set { _albumId = value; }
@@ -191,7 +191,7 @@ namespace NuttinButCDs
                      Uri albumImageLarge,
                      ObservableCollection<string> songs)
         {
-            AlbumId = id;
+            AlbumID = id;
             AlbumName = albumName;
             ArtistName = artistName;
             Genre = genre;

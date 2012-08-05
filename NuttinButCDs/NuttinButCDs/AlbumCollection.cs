@@ -72,7 +72,7 @@ namespace NuttinButCDs
                 }
 
                 base.Add(new Album(
-                    (int)aRow["AlbumId"],
+                    (int)aRow["AlbumID"],
                     ConvertFromDBVal<string>(aRow["AlbumName"]),
                     ConvertFromDBVal<string>(aRow["ArtistName"]),
                     ConvertFromDBVal<string>(aRow["Genre"]),
@@ -82,18 +82,40 @@ namespace NuttinButCDs
                     new Uri(ConvertFromDBVal<string>(aRow["AlbumImageSmall"])),
                     new Uri(ConvertFromDBVal<string>(aRow["AlbumImageLarge"])),
                     songs));
-
             }
         }
 
         public new bool Remove(Album album)
         {
-            // TODO: Remove songs too.
-
-            DataRow theRow = CDsDataSet.Albums.Rows.Find(album.AlbumId);
+            DataRow theRow = CDsDataSet.Albums.Rows.Find(album.AlbumID);
 
             if (theRow != null)
             {
+                string expression = "AlbumID = " + album.AlbumID;
+                DataRow[] mySongs = songDataTable.Select(expression);
+                int numSongs = mySongs.Count();
+
+                if (numSongs > 0)
+                {
+                    for (int i = numSongs-1; i >= 0 ; i-- )
+                    {
+                        mySongs[i].Delete();
+                    }
+
+                    try
+                    {
+                        songsTableAdapter.Update(CDsDataSet.Songs);
+                        CDsDataSet.Songs.AcceptChanges();
+                        songDataTable = songsTableAdapter.GetData();
+                        //MessageBox.Show("Update songs successful");
+                    }
+                    catch (System.Exception ex)
+                    {
+                        MessageBox.Show("Update songs failed: " + ex.Message);
+                    }
+                }
+
+                mySongs = songDataTable.Select(expression);
                 theRow.Delete();
 
                 try
@@ -101,15 +123,16 @@ namespace NuttinButCDs
                     albumsTableAdapter.Update(CDsDataSet.Albums);
                     CDsDataSet.Albums.AcceptChanges();
                     albumDataTable = albumsTableAdapter.GetData();
-                    //MessageBox.Show("Update successful");
+                    MessageBox.Show("Update album successful");
                 }
                 catch (System.Exception ex)
                 {
-                    MessageBox.Show("Update failed: " + ex.Message);
+                    MessageBox.Show("Update album failed: " + ex.Message);
                 }
-            }
 
-            return base.Remove(album);
+                base.Remove(album);
+            }
+            return true; // TODO: set this better and have callers check it.
         }
 
         public new void Add(Album album)
@@ -150,7 +173,7 @@ namespace NuttinButCDs
             // TODO: Do something intelligent if no rows found.
             if (myRows.Count() > 0)
             {
-                album.AlbumId = (int)myRows[myRows.Count()-1]["AlbumId"];
+                album.AlbumID = (int)myRows[myRows.Count()-1]["AlbumID"];
             }
             base.Add(album);
 
@@ -160,7 +183,7 @@ namespace NuttinButCDs
 
                 songRow.BeginEdit();
                 songRow["SongName"] = song;
-                songRow["SongName"] = album.AlbumId;
+                songRow["AlbumID"] = album.AlbumID;
                 songRow.EndEdit();
 
                 CDsDataSet.Songs.Rows.Add(songRow);

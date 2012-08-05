@@ -202,7 +202,7 @@
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_Songs_Albums" msdata:parent="Albums" msdata:child="Songs" msdata:parentkey="AlbumID" msdata:childkey="AlbumID" msprop:Generator_UserChildTable="Songs" msprop:Generator_ChildPropName="GetSongsRows" msprop:Generator_UserParentTable="Albums" msprop:Generator_UserRelationName="FK_Songs_Albums" msprop:Generator_RelationVarName="relationFK_Songs_Albums" msprop:Generator_ParentPropName="AlbumsRow" />
+      <msdata:Relationship name="FK_Songs_Albums" msdata:parent="Albums" msdata:child="Songs" msdata:parentkey="AlbumID" msdata:childkey="AlbumID" msprop:Generator_UserChildTable="Songs" msprop:Generator_ChildPropName="GetSongsRows" msprop:Generator_ParentPropName="AlbumsRow" msprop:Generator_UserRelationName="FK_Songs_Albums" msprop:Generator_RelationVarName="relationFK_Songs_Albums" msprop:Generator_UserParentTable="Albums" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
