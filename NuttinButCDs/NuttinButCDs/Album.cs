@@ -9,6 +9,7 @@ namespace NuttinButCDs
 {
     public class Album : INotifyPropertyChanged, ICloneable
     {
+        private int _albumId;
         private string _albumName;
         private string _artistName;
         private string _genre;
@@ -153,13 +154,20 @@ namespace NuttinButCDs
             }
         }
 
+        public int AlbumId
+        {
+            get { return _albumId; }
+            set { _albumId = value; }
+        }
+
 
         public Album()
         {
 
         }
 
-        public Album(string albumName,
+        public Album(int id,
+                     string albumName,
                      string artistName,
                      string genre,
                      int year,
@@ -169,6 +177,7 @@ namespace NuttinButCDs
                      Uri albumImageLarge,
                      ObservableCollection<string> songs)
         {
+            AlbumId = id;
             AlbumName = albumName;
             ArtistName = artistName;
             Genre = genre;

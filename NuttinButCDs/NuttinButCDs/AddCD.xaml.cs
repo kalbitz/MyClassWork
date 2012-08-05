@@ -62,7 +62,8 @@ namespace NuttinButCDs
                     songs.Add(alb.Disks[i].Tracks[j].Title);
             }
             
-            Album newAlbum = new Album(alb.Title,
+            Album newAlbum = new Album(0,
+                                       alb.Title,
                                        alb.Artist.Name,
                                        null,
                                        alb.ReleaseDate.Year,
