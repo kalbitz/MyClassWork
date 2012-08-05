@@ -18,14 +18,22 @@ namespace NuttinButCDs
     /// </summary>
     public partial class Delete : Window
     {
-        public Delete()
+        private Album _deletableAlbum;
+
+        public Delete(Album album)
         {
             InitializeComponent();
+            _deletableAlbum = album;
         }
 
         private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
-
+            if (_deletableAlbum != null)
+            {
+                MainWindow.MyAlbums.Remove(_deletableAlbum);
+            }
+            e.Handled = true;
+            this.Close();
         }
 
         private void PuntButtonClick(object sender, RoutedEventArgs e)

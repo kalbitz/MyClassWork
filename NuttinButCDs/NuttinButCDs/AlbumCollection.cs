@@ -88,7 +88,27 @@ namespace NuttinButCDs
 
         public new bool Remove(Album album)
         {
-            // TODO: remove from db too.
+            // TODO: Remove songs too.
+
+            DataRow theRow = CDsDataSet.Albums.Rows.Find(album.AlbumId);
+
+            if (theRow != null)
+            {
+                theRow.Delete();
+
+                try
+                {
+                    albumsTableAdapter.Update(CDsDataSet.Albums);
+                    CDsDataSet.Albums.AcceptChanges();
+                    albumDataTable = albumsTableAdapter.GetData();
+                    //MessageBox.Show("Update successful");
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("Update failed: " + ex.Message);
+                }
+            }
+
             return base.Remove(album);
         }
 
@@ -115,15 +135,14 @@ namespace NuttinButCDs
                 albumsTableAdapter.Update(CDsDataSet.Albums);
                 CDsDataSet.Albums.AcceptChanges();
                 albumDataTable = albumsTableAdapter.GetData();
-                MessageBox.Show("Update successful"); // TODO: Make this a pretty box
+                //MessageBox.Show("Update successful");
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show("Update failed: " + ex.Message);
             }
 
-            albumDataTable = albumsTableAdapter.GetData();
-            DataRowCollection albumRows = albumDataTable.Rows;
+            //DataRowCollection albumRows = albumDataTable.Rows;
 
             string expression = "AlbumName = " + "\'" + (string)newRow["AlbumName"] + "\'";
             DataRow[] myRows = albumDataTable.Select(expression);
@@ -153,14 +172,12 @@ namespace NuttinButCDs
                 songsTableAdapter.Update(CDsDataSet.Songs);
                 CDsDataSet.Songs.AcceptChanges();
                 songDataTable = songsTableAdapter.GetData();
-                MessageBox.Show("Update successful"); // TODO: Make this a pretty box
+                //MessageBox.Show("Update successful");
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show("Update failed: " + ex.Message);
             }
-
-            songDataTable = songsTableAdapter.GetData();
         }
 
         public void Update(Album curAlbum, Album newAlbum)
