@@ -36,7 +36,7 @@
             <Button Content="Close" x:Name="CloseButton" Margin="7,0,0,0" IsCancel="True" Click="CloseButtonClick" Command="ApplicationCommands.Close" />
         </ToolBar>
 
-        <DataGrid Background="Cornsilk" ItemsSource="MyAlbums" Name="albumDataGrid" SelectionMode="Single" GridLinesVisibility="Horizontal" RowBackground="Cornsilk" DataContext="{Binding}" AutoGenerateColumns="False">
+        <DataGrid Background="Cornsilk" ItemsSource="MyAlbums" Name="albumDataGrid" SelectionMode="Single" GridLinesVisibility="Horizontal" RowBackground="Cornsilk" DataContext="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Album Cover" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
