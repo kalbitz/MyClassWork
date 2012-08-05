@@ -6,6 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
+/* TODO
+ * Redesign this to be able to bind directly to the db data rather than going
+ * to the extra step of moving data betwee the db and the observable collection.
+ * */
+
 namespace NuttinButCDs
 {
     public class AlbumCollection : ObservableCollection<Album>
@@ -67,6 +72,7 @@ namespace NuttinButCDs
                 {
                     songs.Add(ConvertFromDBVal<string>(sRow["SongName"]));
                 }
+
                 base.Add(new Album(
                     (int)aRow["AlbumId"],
                     ConvertFromDBVal<string>(aRow["AlbumName"]),
@@ -75,7 +81,7 @@ namespace NuttinButCDs
                     (int)aRow["Year"],
                     (int)aRow["Rating"],
                     ConvertFromDBVal<string>(aRow["Comment"]),
-                    new Uri(ConvertFromDBVal<string>(aRow["AlbumImageSmall"])), 
+                    new Uri(ConvertFromDBVal<string>(aRow["AlbumImageSmall"])),
                     new Uri(ConvertFromDBVal<string>(aRow["AlbumImageLarge"])),
                     songs));
 
@@ -90,7 +96,6 @@ namespace NuttinButCDs
 
         public new void Add(Album album)
         {
-            // TODO: add to DB too.
             NuttinButCDsDBDataSet.AlbumsRow newRow = CDsDataSet.Albums.NewAlbumsRow();
 
             newRow.BeginEdit();
@@ -102,43 +107,27 @@ namespace NuttinButCDs
             newRow["Comment"] = album.Comment;
             newRow["AlbumImageSmall"] = album.AlbumImageSmall.ToString();
             newRow["AlbumImageLarge"] = album.AlbumImageLarge.ToString();
-            //newRow.RowState = DataRowState.Modified;
             newRow.EndEdit();
 
-            //CDsDataSet.Albums.AddAlbumsRow(newRow);
-
             CDsDataSet.Albums.Rows.Add(newRow);
-            CDsDataSet.Albums.AcceptChanges();
 
             try
             {
-                //this.Validate();
-                //this.customersBindingSource.EndEdit();
-                //this.customersTableAdapter.Update(this.northwindDataSet.Customers);
+                // TODO: Validate data first!
                 albumsTableAdapter.Update(CDsDataSet.Albums);
-                MessageBox.Show("Update successful");
-                albumsTableAdapter.Fill(CDsDataSet.Albums);
+                CDsDataSet.Albums.AcceptChanges();
+                MessageBox.Show("Update successful"); // TODO: Make this a pretty box
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Update failed");
+                MessageBox.Show("Update failed: " + ex.Message);
             }
-
-            //album.AlbumId = (int)newRow["AlbumId"];
-            string expression = "AlbumName = " + "\'" + (string)newRow["AlbumName"] + "\'";
-            DataRow[] myRows = albumDataTable.Select(expression);
-            albumsTableAdapter.GetData();
-            DataRowCollection albumRows = albumDataTable.Rows;
-
-            //NorthwindDataSet.CustomersRow newCustomersRow =
-            //northwindDataSet1.Customers.NewCustomersRow();
-
-            //newCustomersRow.CustomerID = "ALFKI";
-            //newCustomersRow.CompanyName = "Alfreds Futterkiste";
-
-            //northwindDataSet1.Customers.Rows.Add(newCustomersRow);
-
             base.Add(album);
+
+            //albumDataTable = albumsTableAdapter.GetData();
+            //DataRowCollection albumRows = albumDataTable.Rows;
+            //int index = CDsDataSet.Albums.Rows.IndexOf(newRow);
+            //newRow = (NuttinButCDsDBDataSet.AlbumsRow)CDsDataSet.Albums.Rows[index];
         }
 
         public void Update(Album curAlbum, Album newAlbum)
