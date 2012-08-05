@@ -27,7 +27,7 @@ namespace NuttinButCDs
         {
             if (obj == null || obj == DBNull.Value)
             {
-                return default(T); // returns the default value for the type
+                return default(T);
             }
             else
             {
@@ -37,9 +37,6 @@ namespace NuttinButCDs
 
         public AlbumCollection()
         {
-            // TODO: Fill in from database
-            
-
             //ObservableCollection<string> songs = new ObservableCollection<string>();
             //songs.Add("Song 1");
             //songs.Add("Song 2");
@@ -52,6 +49,7 @@ namespace NuttinButCDs
             //Add(new Album("The White Album", "Beatles", "Pop", 1969, 0, "", null, null, null));
             //Add(new Album("21", "Adele", "R&B", 2012, 2, "Not as good as they say", null, null, songs));
 
+            // Pierre, you are an evil man for having suggested implementing a database! Geez!
             // TODO: Presmuably there is a better way to fill the collection from the db...
 
             albumsTableAdapter.Fill(CDsDataSet.Albums);
@@ -116,23 +114,57 @@ namespace NuttinButCDs
                 // TODO: Validate data first!
                 albumsTableAdapter.Update(CDsDataSet.Albums);
                 CDsDataSet.Albums.AcceptChanges();
+                albumDataTable = albumsTableAdapter.GetData();
                 MessageBox.Show("Update successful"); // TODO: Make this a pretty box
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show("Update failed: " + ex.Message);
             }
+
+            albumDataTable = albumsTableAdapter.GetData();
+            DataRowCollection albumRows = albumDataTable.Rows;
+
+            string expression = "AlbumName = " + "\'" + (string)newRow["AlbumName"] + "\'";
+            DataRow[] myRows = albumDataTable.Select(expression);
+
+            // TODO: Do something intelligent if no rows found.
+            if (myRows.Count() > 0)
+            {
+                album.AlbumId = (int)myRows[myRows.Count()-1]["AlbumId"];
+            }
             base.Add(album);
 
-            //albumDataTable = albumsTableAdapter.GetData();
-            //DataRowCollection albumRows = albumDataTable.Rows;
-            //int index = CDsDataSet.Albums.Rows.IndexOf(newRow);
-            //newRow = (NuttinButCDsDBDataSet.AlbumsRow)CDsDataSet.Albums.Rows[index];
+            foreach (string song in album.Songs)
+            {
+                NuttinButCDsDBDataSet.SongsRow songRow = CDsDataSet.Songs.NewSongsRow();
+
+                songRow.BeginEdit();
+                songRow["SongName"] = song;
+                songRow["SongName"] = album.AlbumId;
+                songRow.EndEdit();
+
+                CDsDataSet.Songs.Rows.Add(songRow);
+            }
+
+            try
+            {
+                // TODO: Validate data first!
+                songsTableAdapter.Update(CDsDataSet.Songs);
+                CDsDataSet.Songs.AcceptChanges();
+                songDataTable = songsTableAdapter.GetData();
+                MessageBox.Show("Update successful"); // TODO: Make this a pretty box
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Update failed: " + ex.Message);
+            }
+
+            songDataTable = songsTableAdapter.GetData();
         }
 
         public void Update(Album curAlbum, Album newAlbum)
         {
-            // TODO: update in DB too.
             Remove(curAlbum);
             Add(newAlbum);
         }
