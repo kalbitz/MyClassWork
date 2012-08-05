@@ -48,6 +48,11 @@ namespace NuttinButCDs
                     string errorMsg = "Surely someone made this album!";
                     throw new ApplicationException(errorMsg);
                 }
+                else if (value.Length > 100)
+                {
+                    string errorMsg = "Too long!";
+                    throw new ApplicationException(errorMsg);
+                }
                 _artistName = value;
                 if (PropertyChanged != null)
                 {
