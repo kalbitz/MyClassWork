@@ -65,13 +65,18 @@ namespace NuttinButCDs
                     songs.Add(ConvertFromDBVal<string>(sRow["SongName"]));
                 }
 
-                expression = String.Format("GenreID = {0}", (int)aRow["GenreID"]);
-                DataRow[] genreRows = genreDataTable.Select(expression);
                 string genre = null;
-                if (genreRows != null)
+                if (aRow["GenreID"] != null && aRow["GenreID"] != DBNull.Value)
                 {
-                    genre = ConvertFromDBVal<string>(genreRows[0]["GenreName"]);
+                    expression = String.Format("GenreID = {0}", (int)aRow["GenreID"]);
+                    DataRow[] genreRows = genreDataTable.Select(expression);
+
+                    if (genreRows != null && genreRows.Count() > 0)
+                    {
+                        genre = ConvertFromDBVal<string>(genreRows[0]["GenreName"]);
+                    }                    
                 }
+
 
                 base.Add(new Album(
                     (int)aRow["AlbumID"],
@@ -132,6 +137,7 @@ namespace NuttinButCDs
         public new void Add(Album album)
         {
             NuttinButCDsDBDataSet.AlbumsRow newRow;
+            string expression = "";
 
             if (album == null)
             {
@@ -139,14 +145,17 @@ namespace NuttinButCDs
                 return;
             }
 
-            string expression = "GenreName = " + "\'" + album.Genre + "\'";
-            DataRow[] genreRows = genreDataTable.Select(expression);
             int genreID = 0;
-            if (genreRows != null)
+            if (album.Genre != null)
             {
-                genreID = (int)genreRows[0]["GenreID"];
+                expression = "GenreName = " + "\'" + album.Genre + "\'";
+                DataRow[] genreRows = genreDataTable.Select(expression);
+                if (genreRows != null && genreRows.Count() > 0 &&
+                    genreRows[0]["GenreID"] != null && genreRows[0]["GenreID"] != DBNull.Value)
+                {
+                    genreID = (int)genreRows[0]["GenreID"];
+                }
             }
-
             newRow = CDsDataSet.Albums.NewAlbumsRow();
 
             newRow.BeginEdit();
@@ -173,6 +182,7 @@ namespace NuttinButCDs
                 albumsTableAdapter.Fill(CDsDataSet.Albums);
                 albumDataTable = albumsTableAdapter.GetData();
                 //MessageBox.Show("Update successful");
+                base.Add(album);
             }
             catch (System.Exception ex)
             {
@@ -187,7 +197,6 @@ namespace NuttinButCDs
             {
                 album.AlbumID = (int)myRows[myRows.Count()-1]["AlbumID"];
             }
-            base.Add(album);
 
             DataRow theRow = CDsDataSet.Albums.Rows.Find(album.AlbumID);
 
@@ -223,12 +232,14 @@ namespace NuttinButCDs
             if (curAlbum == null || newAlbum == null)
             {
                 MessageBox.Show("Update failed: null album: " +
-                    ((curAlbum == null) ? "curAlbum" : "") + 
+                    ((curAlbum == null) ? "curAlbum" : "") + " " +
                     ((newAlbum == null) ? "newAlbum" : "")) ;
                 return;
             }
-            Remove(curAlbum);
-            Add(newAlbum);
+            if (Remove(curAlbum) == true)
+            {
+                Add(newAlbum);
+            }
         }
     }
 }
