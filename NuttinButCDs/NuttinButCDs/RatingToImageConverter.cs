@@ -43,7 +43,7 @@ namespace NuttinButCDs
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return (int)value;
         }
     }
 }
