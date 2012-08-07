@@ -84,8 +84,8 @@ namespace NuttinButCDs
             _genres = MainWindow.Genres;
             _ratings = MainWindow.Ratings;
             editNameTextBox.Focus();
-            EditableAlbum = album;
-            oldAlbum = (Album)EditableAlbum.Clone();
+            oldAlbum = album;
+            EditableAlbum = (Album)album.Clone();
             DataContext = this;
 
             // web says there's a timing defect requiring this...?
@@ -95,14 +95,13 @@ namespace NuttinButCDs
 
         private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
+            MainWindow.UpdateAlbum(oldAlbum, EditableAlbum);
             e.Handled = true;
             this.Close();
         }
 
         private void PuntButtonClick(object sender, RoutedEventArgs e)
         {
-            // Restore old album
-            MainWindow.UpdateAlbum(EditableAlbum, oldAlbum);
             e.Handled = true;
             this.Close();
         }
