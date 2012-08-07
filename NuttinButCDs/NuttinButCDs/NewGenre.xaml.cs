@@ -16,6 +16,9 @@ namespace NuttinButCDs
     /// <summary>
     /// Interaction logic for NewGenre.xaml
     /// </summary>
+    /// 
+
+    // TODO: Add ability to delete a genre
     public partial class NewGenre : Window
     {
         public NewGenre()

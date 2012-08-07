@@ -19,11 +19,15 @@ namespace NuttinButCDs
         private NuttinButCDsDBDataSet CDsDataSet = new NuttinButCDsDBDataSet();
         private DataTable albumDataTable = new DataTable("myAlbums");
         private DataTable songDataTable = new DataTable("mySongs");
+        private DataTable genreDataTable = new DataTable("myGenres");
         private NuttinButCDsDBDataSetTableAdapters.AlbumsTableAdapter albumsTableAdapter =
             new NuttinButCDsDBDataSetTableAdapters.AlbumsTableAdapter();
         private NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter songsTableAdapter =
             new NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter();
+        private NuttinButCDsDBDataSetTableAdapters.GenresTableAdapter genresTableAdapter =
+            new NuttinButCDsDBDataSetTableAdapters.GenresTableAdapter();
 
+        // TODO: make this a centrally located tool rather than replicate the code!
         public static T ConvertFromDBVal<T>(object obj)
         {
             if (obj == null || obj == DBNull.Value)
@@ -39,13 +43,14 @@ namespace NuttinButCDs
         public AlbumCollection()
         {
             // Pierre, you are an evil man for having suggested implementing a database! Geez!
-            // TODO: Presmuably there is a better way to fill the collection from the db...
 
             albumsTableAdapter.Fill(CDsDataSet.Albums);
             songsTableAdapter.Fill(CDsDataSet.Songs);
+            genresTableAdapter.Fill(CDsDataSet.Genres);
 
             albumDataTable = albumsTableAdapter.GetData();
             songDataTable = songsTableAdapter.GetData();
+            genreDataTable = genresTableAdapter.GetData();
 
             DataRowCollection albumRows = albumDataTable.Rows;
             foreach (DataRow aRow in albumRows)
@@ -60,11 +65,19 @@ namespace NuttinButCDs
                     songs.Add(ConvertFromDBVal<string>(sRow["SongName"]));
                 }
 
+                expression = String.Format("GenreID = {0}", (int)aRow["GenreID"]);
+                DataRow[] genreRows = genreDataTable.Select(expression);
+                string genre = null;
+                if (genreRows != null)
+                {
+                    genre = ConvertFromDBVal<string>(genreRows[0]["GenreName"]);
+                }
+
                 base.Add(new Album(
                     (int)aRow["AlbumID"],
                     ConvertFromDBVal<string>(aRow["AlbumName"]),
                     ConvertFromDBVal<string>(aRow["ArtistName"]),
-                    ConvertFromDBVal<string>(aRow["Genre"]),
+                    genre,
                     (int)aRow["Year"],
                     (int)aRow["Rating"],
                     ConvertFromDBVal<string>(aRow["Comment"]),
@@ -77,36 +90,18 @@ namespace NuttinButCDs
         public new bool Remove(Album album)
         {
             bool result = false;
-            DataRow theRow = CDsDataSet.Albums.Rows.Find(album.AlbumID);
+            DataRow theRow;
+
+            if (album == null)
+            {
+                MessageBox.Show("Remove failed: null album");
+                return false;
+            }
+                
+            theRow = CDsDataSet.Albums.Rows.Find(album.AlbumID);
 
             if (theRow != null)
             {
-                //string expression = "AlbumID = " + album.AlbumID;
-                //DataRow[] mySongs = songDataTable.Select(expression);
-                //int numSongs = mySongs.Count();
-
-                //if (numSongs > 0)
-                //{
-                //    for (int i = numSongs-1; i >= 0 ; i-- )
-                //    {
-                //        mySongs[i].Delete();
-                //    }
-
-                //    try
-                //    {
-                //        songsTableAdapter.Update(CDsDataSet.Songs);
-                //        CDsDataSet.Songs.AcceptChanges();
-                //        songDataTable = songsTableAdapter.GetData();
-                //        MessageBox.Show("Update songs successful");
-                //    }
-                //    catch (System.Exception ex)
-                //    {
-                //        MessageBox.Show("Update songs failed: " + ex.Message);
-                //    }
-                //}
-
-                //mySongs = songDataTable.Select(expression);
-
                 theRow.Delete();
 
                 try
@@ -125,17 +120,42 @@ namespace NuttinButCDs
 
                 result = base.Remove(album);
             }
+            else
+            {
+                {
+                    MessageBox.Show("Can't find album in DB: " + album.AlbumName);
+                }
+            }
             return result; // TODO: set this better and have callers check it.
         }
 
         public new void Add(Album album)
         {
-            NuttinButCDsDBDataSet.AlbumsRow newRow = CDsDataSet.Albums.NewAlbumsRow();
+            NuttinButCDsDBDataSet.AlbumsRow newRow;
+
+            if (album == null)
+            {
+                MessageBox.Show("Add failed: null album");
+                return;
+            }
+
+            string expression = "GenreName = " + "\'" + album.Genre + "\'";
+            DataRow[] genreRows = genreDataTable.Select(expression);
+            int genreID = 0;
+            if (genreRows != null)
+            {
+                genreID = (int)genreRows[0]["GenreID"];
+            }
+
+            newRow = CDsDataSet.Albums.NewAlbumsRow();
 
             newRow.BeginEdit();
             newRow["AlbumName"] = album.AlbumName;
             newRow["ArtistName"] = album.ArtistName;
-            newRow["Genre"] = album.Genre;
+            if (genreID != 0)
+            {
+                newRow["GenreID"] = genreID;
+            }
             newRow["Year"] = album.Year;
             newRow["Rating"] = album.Rating;
             newRow["Comment"] = album.Comment;
@@ -156,10 +176,10 @@ namespace NuttinButCDs
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Update failed: " + ex.Message);
+                MessageBox.Show("Update album failed: " + ex.Message);
             }
 
-            string expression = "AlbumName = " + "\'" + album.AlbumName + "\'";
+            expression = "AlbumName = " + "\'" + album.AlbumName + "\'";
             DataRow[] myRows = albumDataTable.Select(expression);
 
             // TODO: Do something intelligent if no rows found.
@@ -194,12 +214,19 @@ namespace NuttinButCDs
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Update failed: " + ex.Message);
+                MessageBox.Show("Update songs failed: " + ex.Message);
             }
         }
 
         public void Update(Album curAlbum, Album newAlbum)
         {
+            if (curAlbum == null || newAlbum == null)
+            {
+                MessageBox.Show("Update failed: null album: " +
+                    ((curAlbum == null) ? "curAlbum" : "") + 
+                    ((newAlbum == null) ? "newAlbum" : "")) ;
+                return;
+            }
             Remove(curAlbum);
             Add(newAlbum);
         }

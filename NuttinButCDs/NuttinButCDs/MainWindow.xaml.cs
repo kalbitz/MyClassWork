@@ -29,8 +29,8 @@ namespace NuttinButCDs
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static List<string> _genres = new List<string>() {
-            "Rock", "Pop", "Classical", "Hip Hop", "Jazz", "Blues" };
+        private static List<string> _genres = new List<string>();
+           // {"Rock", "Pop", "Classical", "Hip Hop", "Jazz", "Blues" };
         private static List<int> _ratings = new List<int>() {0,1,2,3,4};
         private static List<int> _years = new List<int>();
 
@@ -63,6 +63,7 @@ namespace NuttinButCDs
             for (int year = 1900; year <= DateTime.Now.Year; year++) { _years.Add(year); }
 
             MyAlbums = new AlbumCollection();
+            Genres = new Genres();
             albumDataGrid.ItemsSource = MyAlbums;
         }
 
