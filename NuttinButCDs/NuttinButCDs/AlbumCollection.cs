@@ -9,6 +9,7 @@ using System.Windows;
 /* TODO
  * Redesign this to be able to bind directly to the db data rather than going
  * to the extra step of moving data betwee the db and the observable collection.
+ * And/Or design in the db from the beginning with EntityDataModel
  * */
 
 namespace NuttinButCDs
@@ -37,18 +38,6 @@ namespace NuttinButCDs
 
         public AlbumCollection()
         {
-            //ObservableCollection<string> songs = new ObservableCollection<string>();
-            //songs.Add("Song 1");
-            //songs.Add("Song 2");
-            //songs.Add("Song 3");
-
-            //Uri image = new Uri("http://ecx.images-amazon.com/images/I/61QzCwpt7mL._SL75_.jpg");
-
-            //Add(new Album("Goodbye Yellowbrick Road", "Elton John", "Rock", 1972, 4, "Best EJ there is!", null, null, songs));
-            //Add(new Album("Fat Bottom Girls", "Queen", "Rock", 1974, 3, "", image, image, songs));
-            //Add(new Album("The White Album", "Beatles", "Pop", 1969, 0, "", null, null, null));
-            //Add(new Album("21", "Adele", "R&B", 2012, 2, "Not as good as they say", null, null, songs));
-
             // Pierre, you are an evil man for having suggested implementing a database! Geez!
             // TODO: Presmuably there is a better way to fill the collection from the db...
 
@@ -87,52 +76,56 @@ namespace NuttinButCDs
 
         public new bool Remove(Album album)
         {
+            bool result = false;
             DataRow theRow = CDsDataSet.Albums.Rows.Find(album.AlbumID);
 
             if (theRow != null)
             {
-                string expression = "AlbumID = " + album.AlbumID;
-                DataRow[] mySongs = songDataTable.Select(expression);
-                int numSongs = mySongs.Count();
+                //string expression = "AlbumID = " + album.AlbumID;
+                //DataRow[] mySongs = songDataTable.Select(expression);
+                //int numSongs = mySongs.Count();
 
-                if (numSongs > 0)
-                {
-                    for (int i = numSongs-1; i >= 0 ; i-- )
-                    {
-                        mySongs[i].Delete();
-                    }
+                //if (numSongs > 0)
+                //{
+                //    for (int i = numSongs-1; i >= 0 ; i-- )
+                //    {
+                //        mySongs[i].Delete();
+                //    }
 
-                    try
-                    {
-                        songsTableAdapter.Update(CDsDataSet.Songs);
-                        CDsDataSet.Songs.AcceptChanges();
-                        songDataTable = songsTableAdapter.GetData();
-                        //MessageBox.Show("Update songs successful");
-                    }
-                    catch (System.Exception ex)
-                    {
-                        MessageBox.Show("Update songs failed: " + ex.Message);
-                    }
-                }
+                //    try
+                //    {
+                //        songsTableAdapter.Update(CDsDataSet.Songs);
+                //        CDsDataSet.Songs.AcceptChanges();
+                //        songDataTable = songsTableAdapter.GetData();
+                //        MessageBox.Show("Update songs successful");
+                //    }
+                //    catch (System.Exception ex)
+                //    {
+                //        MessageBox.Show("Update songs failed: " + ex.Message);
+                //    }
+                //}
 
-                mySongs = songDataTable.Select(expression);
+                //mySongs = songDataTable.Select(expression);
+
                 theRow.Delete();
 
                 try
                 {
                     albumsTableAdapter.Update(CDsDataSet.Albums);
                     CDsDataSet.Albums.AcceptChanges();
+                    albumsTableAdapter.Fill(CDsDataSet.Albums);
+                    songsTableAdapter.Fill(CDsDataSet.Songs);
                     albumDataTable = albumsTableAdapter.GetData();
-                    MessageBox.Show("Update album successful");
+                    //MessageBox.Show("Update album successful");
                 }
                 catch (System.Exception ex)
                 {
                     MessageBox.Show("Update album failed: " + ex.Message);
                 }
 
-                base.Remove(album);
+                result = base.Remove(album);
             }
-            return true; // TODO: set this better and have callers check it.
+            return result; // TODO: set this better and have callers check it.
         }
 
         public new void Add(Album album)
@@ -157,6 +150,7 @@ namespace NuttinButCDs
                 // TODO: Validate data first!
                 albumsTableAdapter.Update(CDsDataSet.Albums);
                 CDsDataSet.Albums.AcceptChanges();
+                albumsTableAdapter.Fill(CDsDataSet.Albums);
                 albumDataTable = albumsTableAdapter.GetData();
                 //MessageBox.Show("Update successful");
             }
@@ -165,9 +159,7 @@ namespace NuttinButCDs
                 MessageBox.Show("Update failed: " + ex.Message);
             }
 
-            //DataRowCollection albumRows = albumDataTable.Rows;
-
-            string expression = "AlbumName = " + "\'" + (string)newRow["AlbumName"] + "\'";
+            string expression = "AlbumName = " + "\'" + album.AlbumName + "\'";
             DataRow[] myRows = albumDataTable.Select(expression);
 
             // TODO: Do something intelligent if no rows found.
@@ -176,6 +168,8 @@ namespace NuttinButCDs
                 album.AlbumID = (int)myRows[myRows.Count()-1]["AlbumID"];
             }
             base.Add(album);
+
+            DataRow theRow = CDsDataSet.Albums.Rows.Find(album.AlbumID);
 
             foreach (string song in album.Songs)
             {
@@ -194,6 +188,7 @@ namespace NuttinButCDs
                 // TODO: Validate data first!
                 songsTableAdapter.Update(CDsDataSet.Songs);
                 CDsDataSet.Songs.AcceptChanges();
+                songsTableAdapter.Fill(CDsDataSet.Songs);
                 songDataTable = songsTableAdapter.GetData();
                 //MessageBox.Show("Update successful");
             }
