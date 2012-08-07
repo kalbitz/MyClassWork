@@ -62,7 +62,7 @@
             SelectedItem="{Binding EditableAlbum.Genre}"
         />
         <Label Grid.Row="6" Grid.Column="0" Content="Comment:" HorizontalAlignment="Left" Name="editCommentLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"  Height="23" HorizontalAlignment="Stretch" 
+        <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding EditableAlbum.Comment, Mode=TwoWay}" Height="23" HorizontalAlignment="Stretch" 
                  Name="editCommentTextBox" VerticalAlignment="Top" MinWidth="20" MinHeight="23" Margin="10,0" />
         <StackPanel Grid.ColumnSpan="3" Grid.Row="9" HorizontalAlignment="Right" Name="buttonStackPanel" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Add Genre" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Grid.Row="9" Name="addGenreButton" Click="AddGenreButtonClick" />
