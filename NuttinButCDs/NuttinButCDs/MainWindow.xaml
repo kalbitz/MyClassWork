@@ -52,7 +52,7 @@
                 <DataGridTemplateColumn Header="Rating" IsReadOnly="True" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Path=Rating, Converter={StaticResource RatingToImageConverter1}}" Height="30" />
+                            <Image Source="{Binding Path=Rating, Converter={StaticResource RatingToImageConverter1}}" Height="25" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
