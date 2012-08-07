@@ -7,18 +7,18 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="60" ViewPortY="56" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:Albums" ZOrder="3" X="70" Y="70" Height="248" Width="188" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
-    <Shape ID="DesignTable:Songs" ZOrder="2" X="328" Y="70" Height="134" Width="179" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
+    <Shape ID="DesignTable:Songs" ZOrder="2" X="436" Y="67" Height="134" Width="179" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_Songs_Albums" ZOrder="1" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>258</X>
-          <Y>137</Y>
+          <Y>134</Y>
         </Point>
         <Point>
-          <X>328</X>
-          <Y>137</Y>
+          <X>436</X>
+          <Y>134</Y>
         </Point>
       </RoutePoints>
     </Connector>
