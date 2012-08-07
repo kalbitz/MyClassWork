@@ -22,7 +22,6 @@ namespace NuttinButCDs
         private List<int> _years;
         private List<string> _genres;
         private List<int> _ratings;
-       // private Object[] _ratingImages;
         private Album _editableAlbum;
         private Album oldAlbum;
 
@@ -78,29 +77,19 @@ namespace NuttinButCDs
             }
         }
 
-        //public Object[] RatingImages
-        //{
-        //    get { return _ratingImages; }
-        //    set { _ratingImages = value; }
-        //}
-
         public EditCD(Album album)
         {
             InitializeComponent();
             _years = MainWindow.Years;
             _genres = MainWindow.Genres;
             _ratings = MainWindow.Ratings;
-            //_ratingImages = new Object[5];
-            //_ratingImages[0] = System.Windows.Application.Current.TryFindResource("noStar");
-            //_ratingImages[1] = System.Windows.Application.Current.TryFindResource("oneStar");
-            //_ratingImages[2] = System.Windows.Application.Current.TryFindResource("twoStar");
-            //_ratingImages[3] = System.Windows.Application.Current.TryFindResource("threeStar");
-            //_ratingImages[4] = System.Windows.Application.Current.TryFindResource("fourStar");
             editNameTextBox.Focus();
             EditableAlbum = album;
             oldAlbum = (Album)EditableAlbum.Clone();
             DataContext = this;
-            ratingComboBox.SelectedValue = EditableAlbum.Rating; // web says there's a timing defect requiring this...?
+
+            // web says there's a timing defect requiring this...?
+            ratingComboBox.SelectedValue = EditableAlbum.Rating; 
         }
 
 
