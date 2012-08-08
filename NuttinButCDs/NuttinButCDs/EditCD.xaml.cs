@@ -110,6 +110,10 @@ namespace NuttinButCDs
         {
             NewGenre newGenre = new NewGenre();
             newGenre.ShowDialog();
+            // Having problems getting this to update by itself. I think it is related
+            // to the fact that I can't implement INotifyPropertyChanged on MainWindow
+            // because it is static. Probably would have to make it a singleton.
+            genreComboBox.ItemsSource = Genres;
         }
 
     public event PropertyChangedEventHandler PropertyChanged;
