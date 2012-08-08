@@ -25,6 +25,10 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             editGenreTextBox.Focus();
+            if (string.IsNullOrEmpty(editGenreTextBox.Text))
+            {
+                doItButton.IsEnabled = false;
+            }
         }
 
         private void EditGenreTextBoxKeyUp(object sender, KeyEventArgs e)
@@ -61,6 +65,18 @@ namespace NuttinButCDs
             else
             {
                 return false;
+            }
+        }
+
+        private void EditGenreTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(editGenreTextBox.Text))
+            {
+                doItButton.IsEnabled = false;
+            }
+            else
+            {
+                doItButton.IsEnabled = true;
             }
         }
     }

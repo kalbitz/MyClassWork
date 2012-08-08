@@ -15,7 +15,7 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="1" Grid.Column="0" Content="Genre:" HorizontalAlignment="Left" Name="editGenreLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="23" HorizontalAlignment="Stretch" Name="editGenreTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" KeyUp="EditGenreTextBoxKeyUp" />
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="23" HorizontalAlignment="Stretch" Name="editGenreTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" KeyUp="EditGenreTextBoxKeyUp" TextChanged="EditGenreTextBoxTextChanged" />
         <StackPanel Grid.ColumnSpan="3" Grid.Row="3" HorizontalAlignment="Right" Name="buttonStackPanel" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" IsDefault="True" />
             <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
