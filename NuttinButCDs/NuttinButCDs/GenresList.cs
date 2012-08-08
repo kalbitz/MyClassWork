@@ -82,6 +82,7 @@ namespace NuttinButCDs
             {
                 MessageBox.Show("Update genre failed: " + ex.Message);
             }
+            base.Add(genre);
         }
     }
 }
