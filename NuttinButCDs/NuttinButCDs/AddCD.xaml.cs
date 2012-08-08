@@ -36,6 +36,11 @@ namespace NuttinButCDs
 
             editArtistTextBox.Focus();
             editArtistTextBox.Text = "Queen";  // TEMPORARY
+            if (string.IsNullOrEmpty(editArtistTextBox.Text))
+            {
+                findItButton.IsEnabled = false;
+            }
+            doItButton.IsEnabled = false;
         }
 
         private void FindItButtonClick(object sender, RoutedEventArgs e)
@@ -118,7 +123,7 @@ namespace NuttinButCDs
 
             findItButton.IsEnabled = true;
             puntButton.IsEnabled   = true;
-            doItButton.IsEnabled   = true;
+            doItButton.IsEnabled   = false;
 
             if (e.Error != null)
             {
@@ -128,6 +133,30 @@ namespace NuttinButCDs
             foundAlbums.Clear();
             foundAlbums = e.Result.ToList();
             albumListBox.ItemsSource = e.Result;
+        }
+
+        private void EditArtistTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(editArtistTextBox.Text))
+            {
+                findItButton.IsEnabled = false;
+            }
+            else
+            {
+                findItButton.IsEnabled = true;
+            }
+        }
+
+        private void AlbumListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (albumListBox.SelectedItems.Count > 0 && albumListBox.SelectedItems[0] != null)
+            {
+                doItButton.IsEnabled = true;
+            }
+            else
+            {
+                doItButton.IsEnabled = false;
+            }
         }
     }
 }

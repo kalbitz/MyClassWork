@@ -48,9 +48,9 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="1" Grid.Column="0" Content="Artist:" HorizontalAlignment="Left" Name="editArtistLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="23" HorizontalAlignment="Stretch" Name="editArtistTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" KeyUp="EditArtistTextBoxKeyUp" />
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Height="23" HorizontalAlignment="Stretch" Name="editArtistTextBox" VerticalAlignment="Center" MinWidth="20" MinHeight="23" Margin="0,0,10,0" KeyUp="EditArtistTextBoxKeyUp" TextChanged="EditArtistTextBoxTextChanged" />
         <ListBox Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="4" Height="Auto" HorizontalAlignment="Stretch" Name="albumListBox" VerticalAlignment="Stretch" Width="Auto" Margin="10,0" 
-                 ItemTemplate="{StaticResource FoundAlbumsDataTemplate}"/>
+                 ItemTemplate="{StaticResource FoundAlbumsDataTemplate}" SelectionChanged="AlbumListBoxSelectionChanged" />
         <TextBlock Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="4" Margin="15,0" FontStyle="Italic" FontSize="14" Text="Ain't None!" Style="{StaticResource EmptyListTextBoxStyle}" Foreground="#FF277406" />
         <StackPanel Grid.ColumnSpan="3" Grid.Row="2" HorizontalAlignment="Right" Name="buttonStackPanel1" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Find it!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="findItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="FindItButtonClick" IsDefault="True" />
