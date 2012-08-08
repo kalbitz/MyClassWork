@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -30,7 +31,6 @@ namespace NuttinButCDs
     public partial class MainWindow : Window
     {
         private static GenresList _genres;
-           // {"Rock", "Pop", "Classical", "Hip Hop", "Jazz", "Blues" };
         private static List<int> _ratings = new List<int>() {0,1,2,3,4};
         private static List<int> _years = new List<int>();
 
@@ -65,6 +65,11 @@ namespace NuttinButCDs
             Genres.Sort();
             MyAlbums = new AlbumCollection();
             albumDataGrid.ItemsSource = MyAlbums;
+            if (albumDataGrid.SelectedItems.Count == 0)
+            {
+                EditButton.IsEnabled = false;
+                DeleteButton.IsEnabled = false;
+            }
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -177,6 +182,20 @@ namespace NuttinButCDs
             widthAnimation.To = 0;
             widthAnimation.Duration = TimeSpan.FromMilliseconds(100);
             LargeAlbumCover.BeginAnimation(WidthProperty, widthAnimation);
+        }
+
+        private void AlbumDataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (albumDataGrid.SelectedItems.Count > 0 && albumDataGrid.SelectedItems[0] != null)
+            {
+                EditButton.IsEnabled = true;
+                DeleteButton.IsEnabled = true;
+            }
+            else
+            {
+                EditButton.IsEnabled = false;
+                DeleteButton.IsEnabled = false;
+            }
         }
     }
 }
