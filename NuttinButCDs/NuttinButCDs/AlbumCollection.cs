@@ -77,6 +77,10 @@ namespace NuttinButCDs
                     }                    
                 }
 
+                string imageSmall = ConvertFromDBVal<string>(aRow["AlbumImageSmall"]);
+                Uri uriSmall = (imageSmall == null) ? null : new Uri(imageSmall);
+                string imageLarge = ConvertFromDBVal<string>(aRow["AlbumImageLarge"]);
+                Uri uriLarge = (imageLarge == null) ? null : new Uri(imageLarge);
 
                 base.Add(new Album(
                     (int)aRow["AlbumID"],
@@ -86,8 +90,8 @@ namespace NuttinButCDs
                     (int)aRow["Year"],
                     (int)aRow["Rating"],
                     ConvertFromDBVal<string>(aRow["Comment"]),
-                    new Uri(ConvertFromDBVal<string>(aRow["AlbumImageSmall"])),
-                    new Uri(ConvertFromDBVal<string>(aRow["AlbumImageLarge"])),
+                    uriSmall,
+                    uriLarge,
                     songs));
             }
         }
@@ -168,8 +172,8 @@ namespace NuttinButCDs
             newRow["Year"] = album.Year;
             newRow["Rating"] = album.Rating;
             newRow["Comment"] = album.Comment;
-            newRow["AlbumImageSmall"] = album.AlbumImageSmall.ToString();
-            newRow["AlbumImageLarge"] = album.AlbumImageLarge.ToString();
+            newRow["AlbumImageSmall"] = (album.AlbumImageSmall == null) ? null : album.AlbumImageSmall.ToString();
+            newRow["AlbumImageLarge"] = (album.AlbumImageLarge == null) ? null : album.AlbumImageLarge.ToString();
             newRow.EndEdit();
 
             CDsDataSet.Albums.Rows.Add(newRow);

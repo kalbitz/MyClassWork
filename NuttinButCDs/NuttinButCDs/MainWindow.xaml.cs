@@ -15,11 +15,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /* TODO
- * Pull out all hard-coded numbers and make them consts
+ * Pull out all hard-coded numbers and make them consts or computed
  * Better validation on stored data
  * Handle multiple disks of songs better
- * Disable buttons until they can be used (Add dialog, etc)
  * Add tooltips
+ * Figure out how to sort the Rating column
  * 
  * */
 
@@ -70,6 +70,11 @@ namespace NuttinButCDs
                 EditButton.IsEnabled = false;
                 DeleteButton.IsEnabled = false;
             }
+            // default the sort to the Artist column, 2
+            var sortCol = albumDataGrid.Columns[2];
+            sortCol.SortDirection = ListSortDirection.Ascending;
+            albumDataGrid.Items.SortDescriptions.Add(new SortDescription(sortCol.SortMemberPath, ListSortDirection.Ascending));
+
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -145,14 +150,13 @@ namespace NuttinButCDs
         private void ImageMouseEnter(object sender, MouseEventArgs e)
         {
             // TODO: Is there a better way to test if hover sender is SelectedItem?
-            //string sString = ((System.Windows.Controls.Image)sender).Source.ToString();
-            //string aString = ((Album)albumDataGrid.SelectedItems[0]).AlbumImageSmall.OriginalString;
 
             if (albumDataGrid.SelectedItems.Count > 0  &&
                 albumDataGrid.SelectedItems[0] != null &&
+                ((Album)albumDataGrid.SelectedItems[0]).AlbumImageSmall != null &&
+                ((Album)albumDataGrid.SelectedItems[0]).AlbumImageLarge != null &&
                 // is the sender the selected image:
-                ((System.Windows.Controls.Image)sender).Source.ToString() == ((Album)albumDataGrid.SelectedItems[0]).AlbumImageSmall.OriginalString && 
-                ((Album)albumDataGrid.SelectedItems[0]).AlbumImageLarge != null)
+                ((System.Windows.Controls.Image)sender).Source.ToString() == ((Album)albumDataGrid.SelectedItems[0]).AlbumImageSmall.OriginalString)
             {
                 Album alb = (Album)albumDataGrid.SelectedItems[0];
 

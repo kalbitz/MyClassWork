@@ -35,7 +35,7 @@ namespace NuttinButCDs
             foundAlbums.Clear();
 
             editArtistTextBox.Focus();
-            editArtistTextBox.Text = "Queen";  // TEMPORARY
+            editArtistTextBox.Text = "Queen";  // TEMPORARY for debugging
             if (string.IsNullOrEmpty(editArtistTextBox.Text))
             {
                 findItButton.IsEnabled = false;
@@ -66,15 +66,18 @@ namespace NuttinButCDs
                 for (int j = 0; j < alb.Disks[i].Tracks.Count(); j++)
                     songs.Add(alb.Disks[i].Tracks[j].Title);
             }
-            
+
+            Uri uriSmall = (alb.SmallImageUrl == null) ? null : new Uri(alb.SmallImageUrl);
+            Uri uriLarge = (alb.LargeImageUrl == null) ? null : new Uri(alb.LargeImageUrl);
+
             Album newAlbum = new Album(0,
                                        alb.Title,
                                        alb.Artist.Name,
                                        null,
                                        alb.ReleaseDate.Year,
                                        0, null,
-                                       new Uri(alb.SmallImageUrl),
-                                       new Uri(alb.LargeImageUrl), 
+                                       uriSmall,
+                                       uriLarge, 
                                        songs);
             MainWindow.MyAlbums.Add(newAlbum);
             e.Handled = true;
