@@ -214,6 +214,7 @@
     <Resource Include="Images\NoStar.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\NuttinIcon.png" />
     <Content Include="NuttinButCDsDB.sdf" />
   </ItemGroup>
   <ItemGroup>

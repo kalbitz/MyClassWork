@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:NuttinButCDs"
+        Icon="{StaticResource nuttinIcon}"
         Title="Nuttin' But CDs" Height="700" Width="850" Background="Cornsilk">
     <Window.Resources>
         <Style TargetType="ListBox" x:Key="ListStyleIfEmpty">

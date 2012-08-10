@@ -79,5 +79,6 @@
     <ImageSource x:Key="twoStar">Images/TwoStar.png</ImageSource>
     <ImageSource x:Key="threeStar">Images/ThreeStar.png</ImageSource>
     <ImageSource x:Key="fourStar">Images/FourStar.png</ImageSource>
+    <ImageSource x:Key="nuttinIcon">Images/NuttinIcon.png</ImageSource>
     <!-- Resource dictionary entries should be defined here. -->
 </ResourceDictionary>
