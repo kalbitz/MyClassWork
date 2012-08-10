@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace NuttinButCDs
 {
@@ -30,10 +31,9 @@ namespace NuttinButCDs
                     string errorMsg = "No album name??";
                     throw new ApplicationException(errorMsg);
                 }
-                else if (value.Length > 200)
+                else if (value.Length > Constants.maxAlbumNameLength)
                 {
-                    string errorMsg = "Too long!";
-                    throw new ApplicationException(errorMsg);
+                    throw new ApplicationException("");
                 }
                 _albumName = value;
                 if (PropertyChanged != null)
@@ -53,10 +53,9 @@ namespace NuttinButCDs
                     string errorMsg = "Surely someone made this album!";
                     throw new ApplicationException(errorMsg);
                 }
-                else if (value.Length > 100)
+                else if (value.Length > Constants.maxArtistNameLength)
                 {
-                    string errorMsg = "Too long!";
-                    throw new ApplicationException(errorMsg);
+                    throw new ApplicationException("");
                 }
                 _artistName = value;
                 if (PropertyChanged != null)
@@ -71,11 +70,13 @@ namespace NuttinButCDs
             get { return _genre; }
             set
             {
-                // TODO: Validate
-                _genre = value;
-                if (PropertyChanged != null)
+                if (String.IsNullOrEmpty(value) || value.Length <= Constants.maxGenreLength)
                 {
-                    PropertyChanged(this, new PropertyChangedEventArgs("Genre"));
+                    _genre = value;
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("Genre"));
+                    }
                 }
             }
         }
@@ -101,8 +102,8 @@ namespace NuttinButCDs
             get { return _rating; }
             set
             {
-                // 0 rating indicates no opinion
-                if (value >= 0 && value <= 4)
+                // minRating rating indicates no opinion
+                if (value >= Constants.minRating && value <= Constants.maxRating)
                 {
                     _rating = value;
                 }
@@ -118,7 +119,10 @@ namespace NuttinButCDs
             get { return _comment; }
             set
             {
-                // TODO: Validate
+                if (!String.IsNullOrEmpty(value) && value.Length > Constants.maxCommentLength)
+                {
+                    throw new ApplicationException("");
+                }
                 _comment = value;
                 if (PropertyChanged != null)
                 {
@@ -191,16 +195,41 @@ namespace NuttinButCDs
                      Uri albumImageLarge,
                      ObservableCollection<string> songs)
         {
-            AlbumID = id;
-            AlbumName = albumName;
-            ArtistName = artistName;
-            Genre = genre;
-            Year = year;
-            Rating = rating;
-            Comment = comment;
-            AlbumImageSmall = albumImageSmall;
-            AlbumImageLarge = albumImageLarge;
-            Songs = songs;
+            if (!String.IsNullOrEmpty(albumName) &&
+                albumName.Length <= Constants.maxAlbumNameLength &&
+
+                ((artistName != null && artistName.Length <= Constants.maxArtistNameLength) || artistName == null) &&
+                ((genre != null && genre.Length <= Constants.maxGenreLength) || genre == null) &&
+                year >= Constants.earliestYear &&
+
+                rating >= Constants.minRating &&
+                rating <= Constants.maxRating &&
+
+                ((comment != null && comment.Length <= Constants.maxCommentLength) || comment == null) &&
+
+                ((albumImageSmall != null &&
+                albumImageSmall.OriginalString.Length <= Constants.maxAlbumImageLength) ||
+                albumImageSmall == null) &&
+
+                ((albumImageLarge != null &&
+                albumImageLarge.OriginalString.Length <= Constants.maxAlbumImageLength) ||
+                albumImageLarge == null) )
+            {
+                AlbumID = id;
+                AlbumName = albumName;
+                ArtistName = artistName;
+                Genre = genre;
+                Year = year;
+                Rating = rating;
+                Comment = comment;
+                AlbumImageSmall = albumImageSmall;
+                AlbumImageLarge = albumImageLarge;
+                Songs = songs;
+            }
+            else
+            {
+                MessageBox.Show("Failed to create an album!");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

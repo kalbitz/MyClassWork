@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Album.cs" />
     <Compile Include="AlbumCollection.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="GenresList.cs" />
     <Compile Include="NullImageConverter.cs" />
     <Compile Include="NuttinButCDsDBDataSet.Designer.cs">

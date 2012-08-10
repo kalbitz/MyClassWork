@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -19,15 +20,43 @@ namespace NuttinButCDs
     /// 
 
     // TODO: Add ability to delete a genre
-    public partial class NewGenre : Window
+    public partial class NewGenre : Window, INotifyPropertyChanged
     {
+        private string _genre;
+
         public NewGenre()
         {
             InitializeComponent();
+            DataContext = this;
             editGenreTextBox.Focus();
-            if (string.IsNullOrEmpty(editGenreTextBox.Text))
-            {
-                doItButton.IsEnabled = false;
+            doItButton.IsEnabled = false;
+        }
+
+        public string Genre
+        {
+            get { return _genre; }
+            set {
+                if (!String.IsNullOrEmpty(value))
+                {
+                    if (value.Length > Constants.maxGenreLength)
+                    {
+                        doItButton.IsEnabled = false;
+                        throw new ApplicationException("");
+                    }
+                    else
+                    {
+                        doItButton.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    doItButton.IsEnabled = false;
+                }
+                _genre = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("Genre"));
+                }
             }
         }
 
@@ -56,7 +85,7 @@ namespace NuttinButCDs
 
         private bool AddGenre()
         {
-            if (!string.IsNullOrEmpty(editGenreTextBox.Text))
+            if (!String.IsNullOrEmpty(editGenreTextBox.Text) && editGenreTextBox.Text.Length <= Constants.maxGenreLength)
             {
                 MainWindow.AddGenre(editGenreTextBox.Text);
                 this.Close();
@@ -68,16 +97,6 @@ namespace NuttinButCDs
             }
         }
 
-        private void EditGenreTextBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(editGenreTextBox.Text))
-            {
-                doItButton.IsEnabled = false;
-            }
-            else
-            {
-                doItButton.IsEnabled = true;
-            }
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

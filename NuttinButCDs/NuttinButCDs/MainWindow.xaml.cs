@@ -20,6 +20,8 @@ using System.Windows.Shapes;
  * Handle multiple disks of songs better
  * Add tooltips
  * Figure out how to sort the Rating column
+ * Error handling could be a lot better!
+ * Better sanitization of SQL data
  * 
  * */
 
@@ -58,8 +60,8 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             LargeAlbumCover.Width = 0;
-	
-            for (int year = 1900; year <= DateTime.Now.Year; year++) { _years.Add(year); }
+
+            for (int year = Constants.earliestYear; year <= DateTime.Now.Year; year++) { _years.Add(year); }
 
             Genres = new GenresList();
             Genres.Sort();

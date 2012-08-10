@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 /* TODO
@@ -142,6 +143,7 @@ namespace NuttinButCDs
         {
             NuttinButCDsDBDataSet.AlbumsRow newRow;
             string expression = "";
+            string cleanString = "";
 
             if (album == null)
             {
@@ -152,7 +154,9 @@ namespace NuttinButCDs
             int genreID = 0;
             if (album.Genre != null)
             {
-                expression = "GenreName = " + "\'" + album.Genre + "\'";
+                // TODO: Do this cleaning of sql query string better!!
+                cleanString = album.Genre.Replace(@"'", @"''"); 
+                expression = "GenreName = " + "\'" + cleanString + "\'";
                 DataRow[] genreRows = genreDataTable.Select(expression);
                 if (genreRows != null && genreRows.Count() > 0 &&
                     genreRows[0]["GenreID"] != null && genreRows[0]["GenreID"] != DBNull.Value)
@@ -193,7 +197,9 @@ namespace NuttinButCDs
                 MessageBox.Show("Update album failed: " + ex.Message);
             }
 
-            expression = "AlbumName = " + "\'" + album.AlbumName + "\'";
+            // TODO: Do this cleaning of sql query string better!!
+            cleanString = album.AlbumName.Replace(@"'", @"''"); 
+            expression = "AlbumName = " + "\'" + cleanString + "\'";
             DataRow[] myRows = albumDataTable.Select(expression);
 
             // TODO: Do something intelligent if no rows found.

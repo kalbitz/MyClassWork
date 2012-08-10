@@ -9,7 +9,7 @@
     			<ResourceDictionary Source="ResourceDictionary.xaml"/>
     		</ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="{x:Type TextBox}" x:Key="TextBoxEmptyError">
+            <Style TargetType="{x:Type TextBox}" x:Key="TextBoxError">
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
