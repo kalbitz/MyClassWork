@@ -57,7 +57,7 @@
         </StackPanel>        
         <StackPanel Grid.ColumnSpan="3" Grid.Row="9" HorizontalAlignment="Right" Name="buttonStackPanel2" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Add it!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" />
-            <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
+            <Button Content="Done!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
         </StackPanel>
         <Grid x:Name="MetronomeGrid" Grid.Column="1" Margin="55.25,-19.306,21.5,-15.473" Grid.Row="5" Grid.RowSpan="2" Visibility="Visible">
         	<Path Data="M12.366145,0.5 L51.905277,0.5 51.907452,0.51177871 C51.933262,0.63384098 51.962135,0.75482249 51.993992,0.87464488 L52.047878,1.0582896 51.646866,1.102987 63,102.9608 63,108.50045 0.5,108.50045 0.5,106.03272 12.386333,1.1866583 12.209895,1.1666558 12.312761,0.78115803 z" Margin="0,9.556,0,0" Stretch="Fill" Stroke="Black" Fill="#FF5C4A0A"/>

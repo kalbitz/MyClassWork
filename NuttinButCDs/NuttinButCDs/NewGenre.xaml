@@ -26,7 +26,7 @@
         </TextBox>
         <StackPanel Grid.ColumnSpan="3" Grid.Row="3" HorizontalAlignment="Right" Name="buttonStackPanel" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
             <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" IsDefault="True" />
-            <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
+            <Button Content="Done!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
         </StackPanel>
         <TextBox Grid.Row="2" HorizontalAlignment="Left" Name="addedTextBox" VerticalAlignment="Top" Width="77" Background="Cornsilk" Foreground="Crimson" Text="Added" FontFamily="Jokerman" FontSize="18" Grid.ColumnSpan="2" Margin="62,0,0,0" BorderBrush="{x:Null}" />
     </Grid>
