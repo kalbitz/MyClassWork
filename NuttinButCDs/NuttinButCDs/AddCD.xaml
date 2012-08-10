@@ -79,5 +79,6 @@
         	</Path>
         	<Path Data="M5.9234192,0.5 L58.010292,0.5 63,45.266373 63,50.806 0.5,50.806 0.5,48.33828 z" Fill="#FF5C4A0A" Height="51.306" Stretch="Fill" Stroke="Black" VerticalAlignment="Bottom" />
         </Grid>
+        <TextBox Grid.Row="9" HorizontalAlignment="Left" Name="addedTextBox" VerticalAlignment="Top" Width="77" Background="Cornsilk" Foreground="Crimson" Text="Added" FontFamily="Jokerman" FontSize="18" Grid.ColumnSpan="2" Margin="10,0,0,0" BorderBrush="{x:Null}" />
     </Grid>
 </Window>

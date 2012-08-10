@@ -41,6 +41,7 @@ namespace NuttinButCDs
                 findItButton.IsEnabled = false;
             }
             doItButton.IsEnabled = false;
+            addedTextBox.Height = 0;
         }
 
         private void FindItButtonClick(object sender, RoutedEventArgs e)
@@ -82,8 +83,12 @@ namespace NuttinButCDs
             MainWindow.MyAlbums.Add(newAlbum);
             e.Handled = true;
 
-            // TODO: Give feedback and stay on page instead of closing
-            this.Close();
+            DoubleAnimation heightAnimation = new DoubleAnimation();
+            heightAnimation.From = 0;
+            heightAnimation.To = 30;
+            heightAnimation.AutoReverse = true;
+            heightAnimation.Duration = TimeSpan.FromMilliseconds(1000);
+            addedTextBox.BeginAnimation(HeightProperty, heightAnimation);
         }
 
         private void PuntButtonClick(object sender, RoutedEventArgs e)

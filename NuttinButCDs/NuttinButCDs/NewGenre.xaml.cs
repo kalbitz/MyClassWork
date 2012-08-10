@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -28,6 +29,7 @@ namespace NuttinButCDs
         {
             InitializeComponent();
             DataContext = this;
+            addedTextBox.Height = 0;
             editGenreTextBox.Focus();
             doItButton.IsEnabled = false;
         }
@@ -88,7 +90,15 @@ namespace NuttinButCDs
             if (!String.IsNullOrEmpty(editGenreTextBox.Text) && editGenreTextBox.Text.Length <= Constants.maxGenreLength)
             {
                 MainWindow.AddGenre(editGenreTextBox.Text);
-                this.Close();
+
+                DoubleAnimation heightAnimation = new DoubleAnimation();
+                heightAnimation.From = 0;
+                heightAnimation.To = 30;
+                heightAnimation.AutoReverse = true;
+                heightAnimation.Duration = TimeSpan.FromMilliseconds(1000);
+                addedTextBox.BeginAnimation(HeightProperty, heightAnimation);
+                editGenreTextBox.Text = "";
+
                 return true;
             }
             else

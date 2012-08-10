@@ -1,13 +1,13 @@
 ﻿<Window x:Class="NuttinButCDs.NewGenre"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="New Genre" Height="151" Width="230" MinWidth="230" MinHeight="150" Name="newGenreWindow" Background="Cornsilk" WindowStartupLocation="CenterOwner">
+        Title="New Genre" Height="170" Width="230" MinWidth="230" MinHeight="150" Name="newGenreWindow" Background="Cornsilk" WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="3*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -28,5 +28,6 @@
             <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" IsDefault="True" />
             <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="PuntButtonClick" />
         </StackPanel>
+        <TextBox Grid.Row="2" HorizontalAlignment="Left" Name="addedTextBox" VerticalAlignment="Top" Width="77" Background="Cornsilk" Foreground="Crimson" Text="Added" FontFamily="Jokerman" FontSize="18" Grid.ColumnSpan="2" Margin="62,0,0,0" BorderBrush="{x:Null}" />
     </Grid>
 </Window>
