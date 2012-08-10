@@ -15,12 +15,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /* TODO
- * Pull out all hard-coded numbers and make them consts or computed
+ * Pull out remaining hard-coded numbers and make them consts or computed
  * Better validation on stored data
  * Handle multiple disks of songs better
  * Add tooltips
  * Figure out how to sort the Rating column
- * Error handling could be a lot better!
+ * Error checking and handling could be a lot better!
  * Better sanitization of SQL data
  * 
  * */
@@ -33,7 +33,7 @@ namespace NuttinButCDs
     public partial class MainWindow : Window
     {
         private static GenresList _genres;
-        private static List<int> _ratings = new List<int>() {0,1,2,3,4};
+        private static List<int> _ratings = new List<int>();
         private static List<int> _years = new List<int>();
 
         public static AlbumCollection MyAlbums;
@@ -62,6 +62,7 @@ namespace NuttinButCDs
             LargeAlbumCover.Width = 0;
 
             for (int year = Constants.earliestYear; year <= DateTime.Now.Year; year++) { _years.Add(year); }
+            for (int rating = Constants.minRating; rating <= Constants.maxRating; rating++) { _ratings.Add(rating); }
 
             Genres = new GenresList();
             Genres.Sort();
