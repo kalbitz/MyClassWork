@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 /* TODO
+ * Make MainWindow a singleton
  * Better validation on stored data
  * Handle multiple disks of songs better
  * Add tooltips
@@ -15,6 +16,7 @@ using System.Windows.Media.Imaging;
  * Error checking and handling could be a lot better!
  * Better sanitization of SQL data
  * Implement remove genre
+ * Make all the fonts the same
  * */
 
 namespace NuttinButCDs
