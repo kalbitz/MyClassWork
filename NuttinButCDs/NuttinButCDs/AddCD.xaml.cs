@@ -8,6 +8,11 @@ using System.Windows.Media.Animation;
 using NuttinButCDs.MusicServiceReference;
 using System.Collections.ObjectModel;
 
+/* TODO
+ * Defect: When you invoke the empty Artist Name validation, then you click away from that box,
+ * you can not click back in the Artist Name box.
+ * */
+
 namespace NuttinButCDs
 {
     public partial class AddCd : Window
