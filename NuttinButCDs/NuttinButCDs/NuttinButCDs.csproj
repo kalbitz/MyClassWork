@@ -80,6 +80,9 @@
     </Compile>
     <Compile Include="Album.cs" />
     <Compile Include="AlbumCollection.cs" />
+    <Compile Include="CloseConf.xaml.cs">
+      <DependentUpon>CloseConf.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="GenresList.cs" />
     <Compile Include="NullImageConverter.cs" />
@@ -104,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddCD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CloseConf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

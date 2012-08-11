@@ -1,0 +1,25 @@
+﻿<Window x:Class="NuttinButCDs.CloseConf"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Close?" Height="200" Width="300" MinHeight="200" MinWidth="300" Name="closeWindow" Background="Cornsilk" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text ="Do you really want to close NuttinButCDs?" HorizontalAlignment="Left" Name="reallyCloseTextBlock" VerticalAlignment="Center" Margin="5,0,0,0" TextWrapping="Wrap" FontFamily="Times New Roman" FontSize="14" />
+        <StackPanel Grid.ColumnSpan="3" Grid.Row="3" HorizontalAlignment="Right" Name="buttonStackPanel" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,10,0">
+            <Button Content="Do It!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="doItButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90" Click="DoItButtonClick" />
+            <Button Content="Punt!" Height="30" HorizontalAlignment="Center" Margin="5,0,0,0" Name="puntButton" Style="{DynamicResource ButtonStyleYellowGradient}" VerticalAlignment="Center" Width="90"  IsDefault="True" Click="PuntButtonClick" />
+        </StackPanel>
+    </Grid>
+</Window>
+
+

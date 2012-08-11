@@ -15,13 +15,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /* TODO
- * Pull out remaining hard-coded numbers and make them consts or computed
  * Better validation on stored data
  * Handle multiple disks of songs better
  * Add tooltips
  * Figure out how to sort the Rating column
  * Error checking and handling could be a lot better!
  * Better sanitization of SQL data
+ * Add a confirmation to the Close button
  * 
  * */
 
@@ -77,7 +77,6 @@ namespace NuttinButCDs
             var sortCol = albumDataGrid.Columns[2];
             sortCol.SortDirection = ListSortDirection.Ascending;
             albumDataGrid.Items.SortDescriptions.Add(new SortDescription(sortCol.SortMemberPath, ListSortDirection.Ascending));
-
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -114,7 +113,8 @@ namespace NuttinButCDs
 
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            CloseConf closeConf = new CloseConf();
+            closeConf.ShowDialog();
         }
 
         private void CloseCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -203,6 +203,11 @@ namespace NuttinButCDs
                 EditButton.IsEnabled = false;
                 DeleteButton.IsEnabled = false;
             }
+        }
+
+        public static void CloseWindow()
+        {
+            Application.Current.MainWindow.Close();
         }
     }
 }

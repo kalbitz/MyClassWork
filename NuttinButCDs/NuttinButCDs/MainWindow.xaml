@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:NuttinButCDs"
         Icon="{StaticResource nuttinIcon}"
-        Title="Nuttin' But CDs" Height="700" Width="850" Background="Cornsilk">
+        Title="Nuttin' But CDs" Height="700" Width="850" MinHeight="500" MinWidth="650" Background="Cornsilk">
     <Window.Resources>
         <Style TargetType="ListBox" x:Key="ListStyleIfEmpty">
             <Style.Triggers>
@@ -31,9 +31,9 @@
             <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButtonClick" Margin="5,0,0,0" />
             <Button Content="Edit" x:Name="EditButton" Click="EditButtonClick" Margin="7,0,0,0" />
             <Button Content="New Genre" x:Name="NewGenreButton" Click="NewGenreButtonClick" Margin="7,0,0,0" />
-            <Separator Margin="7,0,0,0" />
             <Button Content="About" x:Name="AboutButton" Click="AboutButtonClick" Margin="7,0,0,0" />
-            <Button Content="Close" x:Name="CloseButton" Margin="7,0,0,0" IsCancel="True" Click="CloseButtonClick" Command="ApplicationCommands.Close" />
+            <Separator Margin="7,0,0,0" />
+            <Button Content="Close" x:Name="CloseButton" Margin="40,0,0,0" IsCancel="True" Click="CloseButtonClick" Command="ApplicationCommands.Close" />
         </ToolBar>
 
         <DataGrid Background="Cornsilk" ItemsSource="MyAlbums" Name="albumDataGrid" SelectionMode="Single" GridLinesVisibility="Horizontal" RowBackground="Cornsilk" DataContext="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeRows="False" SelectionChanged="AlbumDataGridSelectionChanged">
