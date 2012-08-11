@@ -111,7 +111,7 @@ namespace NuttinButCDs
              * */
 
             //genreComboBox.ItemsSource = Genres;
-            //genreComboBox.GetBindingExpression(ComboBox.ItemsSourceProperty).UpdateSource();
+            //genreComboBox.GetBindingExpression(ComboBox.ItemsSourceProperty).UpdateTarget();
         }
 
     public event PropertyChangedEventHandler PropertyChanged;
