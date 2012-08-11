@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
  * Figure out how to sort the Rating column
  * Error checking and handling could be a lot better!
  * Better sanitization of SQL data
+ * Implement remove genre
  * */
 
 namespace NuttinButCDs
