@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace NuttinButCDs
 {
@@ -73,6 +75,7 @@ namespace NuttinButCDs
             editNameTextBox.Focus();
             oldAlbum = album;
             EditableAlbum = (Album)album.Clone();
+            addGenreButton.Visibility = Visibility.Collapsed; // See AddGenreButtonClick() below
             DataContext = this;
 
             // web says there's a timing defect requiring this...?
@@ -96,10 +99,19 @@ namespace NuttinButCDs
         {
             NewGenre newGenre = new NewGenre();
             newGenre.ShowDialog();
-            // Having problems getting this to update by itself. I think it is related
-            // to the fact that I can't implement INotifyPropertyChanged on MainWindow
-            // because it is static. Probably would have to make it a singleton.
-            genreComboBox.ItemsSource = Genres;
+            /*
+             * I'm having problems getting genreComboBox to update by itself. I think it is 
+             * related to the fact that I can't implement INotifyPropertyChanged on MainWindow
+             * because it is static. Probably would have to make it a singleton.
+             * 
+             * Even so, I cannot get the combo box to update explicitly either. I tried the two
+             * stmts below. Just doing the first one did not work. Adding the second one causes
+             * a null exception in MainWindow.EditAlbum. So for now, I'm going to remove
+             * the addGenreButton from the EditCD dialog. Bummer.
+             * */
+
+            //genreComboBox.ItemsSource = Genres;
+            //genreComboBox.GetBindingExpression(ComboBox.ItemsSourceProperty).UpdateSource();
         }
 
     public event PropertyChangedEventHandler PropertyChanged;
