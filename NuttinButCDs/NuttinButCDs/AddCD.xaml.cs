@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using NuttinButCDs.MusicServiceReference;
 using System.Collections.ObjectModel;
 
 namespace NuttinButCDs
 {
-    /// <summary>
-    /// Interaction logic for AddCD.xaml
-    /// </summary>
     public partial class AddCd : Window
     {
         private MusicServiceSoapClient musicService = new MusicServiceSoapClient();
@@ -35,7 +26,6 @@ namespace NuttinButCDs
             foundAlbums.Clear();
 
             editArtistTextBox.Focus();
-            editArtistTextBox.Text = "Queen";  // TEMPORARY for debugging
             if (string.IsNullOrEmpty(editArtistTextBox.Text))
             {
                 findItButton.IsEnabled = false;
@@ -60,8 +50,8 @@ namespace NuttinButCDs
                 return;
             }
 
-            // you can always tell who learned to program in Fortran...
             // TODO: separate into disks instead of lumping all songs together
+            // you can always tell who learned to program in Fortran...
             for (int i = 0; i < alb.Disks.Count(); i++)
             {
                 for (int j = 0; j < alb.Disks[i].Tracks.Count(); j++)

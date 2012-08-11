@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NuttinButCDs
 {
-    /// <summary>
-    /// Interaction logic for EditCD.xaml
-    /// </summary>
     public partial class EditCD : Window, INotifyPropertyChanged
     {
         private List<int> _years;
@@ -80,8 +67,8 @@ namespace NuttinButCDs
         public EditCD(Album album)
         {
             InitializeComponent();
-            _years = MainWindow.Years;
-            _genres = MainWindow.Genres;
+            _years   = MainWindow.Years;
+            _genres  = MainWindow.Genres;
             _ratings = MainWindow.Ratings;
             editNameTextBox.Focus();
             oldAlbum = album;
@@ -91,7 +78,6 @@ namespace NuttinButCDs
             // web says there's a timing defect requiring this...?
             ratingComboBox.SelectedValue = EditableAlbum.Rating; 
         }
-
 
         private void DoItButtonClick(object sender, RoutedEventArgs e)
         {
@@ -118,5 +104,4 @@ namespace NuttinButCDs
 
     public event PropertyChangedEventHandler PropertyChanged;
     }
-
 }

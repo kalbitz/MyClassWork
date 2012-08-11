@@ -22,7 +22,7 @@ namespace NuttinButCDs
         private void DoneButtonClick(object sender, RoutedEventArgs e)
         {
             e.Handled = true;
-            this.Close();
+            Close();
         }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 
 /* TODO
@@ -19,11 +16,11 @@ namespace NuttinButCDs
     {
         private NuttinButCDsDBDataSet CDsDataSet = new NuttinButCDsDBDataSet();
         private DataTable albumDataTable = new DataTable("myAlbums");
-        private DataTable songDataTable = new DataTable("mySongs");
+        private DataTable songDataTable  = new DataTable("mySongs");
         private DataTable genreDataTable = new DataTable("myGenres");
         private NuttinButCDsDBDataSetTableAdapters.AlbumsTableAdapter albumsTableAdapter =
             new NuttinButCDsDBDataSetTableAdapters.AlbumsTableAdapter();
-        private NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter songsTableAdapter =
+        private NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter  songsTableAdapter =
             new NuttinButCDsDBDataSetTableAdapters.SongsTableAdapter();
         private NuttinButCDsDBDataSetTableAdapters.GenresTableAdapter genresTableAdapter =
             new NuttinButCDsDBDataSetTableAdapters.GenresTableAdapter();
@@ -173,8 +170,8 @@ namespace NuttinButCDs
             {
                 newRow["GenreID"] = genreID;
             }
-            newRow["Year"] = album.Year;
-            newRow["Rating"] = album.Rating;
+            newRow["Year"]    = album.Year;
+            newRow["Rating"]  = album.Rating;
             newRow["Comment"] = album.Comment;
             newRow["AlbumImageSmall"] = (album.AlbumImageSmall == null) ? null : album.AlbumImageSmall.ToString();
             newRow["AlbumImageLarge"] = (album.AlbumImageLarge == null) ? null : album.AlbumImageLarge.ToString();

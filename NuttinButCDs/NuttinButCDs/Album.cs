@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -10,15 +8,15 @@ namespace NuttinButCDs
 {
     public class Album : INotifyPropertyChanged, ICloneable
     {
-        private int _albumId;
+        private int    _albumId;
         private string _albumName;
         private string _artistName;
         private string _genre;
-        private int _year;
-        private int _rating;
+        private int    _year;
+        private int    _rating;
         private string _comment;
-        private Uri _albumImageSmall;
-        private Uri _albumImageLarge;
+        private Uri    _albumImageSmall;
+        private Uri    _albumImageLarge;
         private ObservableCollection<string> _songs = new ObservableCollection<string>();
 
         public string AlbumName
@@ -31,7 +29,7 @@ namespace NuttinButCDs
                     string errorMsg = "No album name??";
                     throw new ApplicationException(errorMsg);
                 }
-                else if (value.Length > Constants.maxAlbumNameLength)
+                else if (value.Length > Constants.MaxAlbumNameLength)
                 {
                     throw new ApplicationException("");
                 }
@@ -53,7 +51,7 @@ namespace NuttinButCDs
                     string errorMsg = "Surely someone made this album!";
                     throw new ApplicationException(errorMsg);
                 }
-                else if (value.Length > Constants.maxArtistNameLength)
+                else if (value.Length > Constants.MaxArtistNameLength)
                 {
                     throw new ApplicationException("");
                 }
@@ -70,7 +68,7 @@ namespace NuttinButCDs
             get { return _genre; }
             set
             {
-                if (String.IsNullOrEmpty(value) || value.Length <= Constants.maxGenreLength)
+                if (String.IsNullOrEmpty(value) || value.Length <= Constants.MaxGenreLength)
                 {
                     _genre = value;
                     if (PropertyChanged != null)
@@ -103,7 +101,7 @@ namespace NuttinButCDs
             set
             {
                 // minRating rating indicates no opinion
-                if (value >= Constants.minRating && value <= Constants.maxRating)
+                if (value >= Constants.MinRating && value <= Constants.MaxRating)
                 {
                     _rating = value;
                 }
@@ -119,7 +117,7 @@ namespace NuttinButCDs
             get { return _comment; }
             set
             {
-                if (!String.IsNullOrEmpty(value) && value.Length > Constants.maxCommentLength)
+                if (!String.IsNullOrEmpty(value) && value.Length > Constants.MaxCommentLength)
                 {
                     throw new ApplicationException("");
                 }
@@ -196,23 +194,23 @@ namespace NuttinButCDs
                      ObservableCollection<string> songs)
         {
             if (!String.IsNullOrEmpty(albumName) &&
-                albumName.Length <= Constants.maxAlbumNameLength &&
+                albumName.Length <= Constants.MaxAlbumNameLength &&
 
-                ((artistName != null && artistName.Length <= Constants.maxArtistNameLength) || artistName == null) &&
-                ((genre != null && genre.Length <= Constants.maxGenreLength) || genre == null) &&
-                year >= Constants.earliestYear &&
+                ((artistName != null && artistName.Length <= Constants.MaxArtistNameLength) || artistName == null) &&
+                ((genre != null && genre.Length <= Constants.MaxGenreLength) || genre == null) &&
+                year >= Constants.EarliestYear &&
 
-                rating >= Constants.minRating &&
-                rating <= Constants.maxRating &&
+                rating >= Constants.MinRating &&
+                rating <= Constants.MaxRating &&
 
-                ((comment != null && comment.Length <= Constants.maxCommentLength) || comment == null) &&
+                ((comment != null && comment.Length <= Constants.MaxCommentLength) || comment == null) &&
 
                 ((albumImageSmall != null &&
-                albumImageSmall.OriginalString.Length <= Constants.maxAlbumImageLength) ||
+                albumImageSmall.OriginalString.Length <= Constants.MaxAlbumImageLength) ||
                 albumImageSmall == null) &&
 
                 ((albumImageLarge != null &&
-                albumImageLarge.OriginalString.Length <= Constants.maxAlbumImageLength) ||
+                albumImageLarge.OriginalString.Length <= Constants.MaxAlbumImageLength) ||
                 albumImageLarge == null) )
             {
                 AlbumID = id;
@@ -238,7 +236,7 @@ namespace NuttinButCDs
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
 
         #endregion

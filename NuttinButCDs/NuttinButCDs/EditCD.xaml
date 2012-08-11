@@ -51,11 +51,8 @@
         <Label Grid.Row="3" Grid.Column="0" Content="Year:" HorizontalAlignment="Left" Name="editYearLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <ComboBox Grid.Column="1" Grid.Row="3" Height="23" HorizontalAlignment="Left" Name="yearComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" Background="White"
             ItemsSource="{Binding Years}" 
-            SelectedItem="{Binding EditableAlbum.Year}"
-        />
+            SelectedItem="{Binding EditableAlbum.Year}" />
         <Label Grid.Row="4" Grid.Column="0" Content="Rating:" HorizontalAlignment="Left" Name="editRatingLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
-
-        
         <ComboBox Grid.Column="1" Grid.Row="4" Height="32" HorizontalAlignment="Left" Name="ratingComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="False" IsReadOnly="True" Background="White"
                   ItemsSource="{Binding Ratings}" 
                   SelectedItem="{Binding EditableAlbum.Rating, Converter={StaticResource RatingToImageConverter1}}"
@@ -69,8 +66,7 @@
         <Label Grid.Row="5" Grid.Column="0" Content="Genre:" HorizontalAlignment="Left" Name="editGenreLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <ComboBox Grid.Column="1" Grid.Row="5" Height="23" HorizontalAlignment="Left" Name="genreComboBox" VerticalAlignment="Center" Width="120" IsTextSearchEnabled="True" Background="White" 
             ItemsSource="{Binding Genres}" 
-            SelectedItem="{Binding EditableAlbum.Genre}"
-        />
+            SelectedItem="{Binding EditableAlbum.Genre}" />
         <Label Grid.Row="6" Grid.Column="0" Content="Comment:" HorizontalAlignment="Left" Name="editCommentLabel" VerticalAlignment="Center" Margin="5,0,0,0"  />
         <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Height="23" HorizontalAlignment="Stretch" 
                  Name="editCommentTextBox" VerticalAlignment="Top" MinWidth="20" MinHeight="23" Margin="10,0" 

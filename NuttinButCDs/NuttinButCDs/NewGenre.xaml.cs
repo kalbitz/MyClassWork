@@ -1,25 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NuttinButCDs
 {
-    /// <summary>
-    /// Interaction logic for NewGenre.xaml
-    /// </summary>
-    /// 
-
     // TODO: Add ability to delete a genre
     public partial class NewGenre : Window, INotifyPropertyChanged
     {
@@ -40,7 +26,7 @@ namespace NuttinButCDs
             set {
                 if (!String.IsNullOrEmpty(value))
                 {
-                    if (value.Length > Constants.maxGenreLength)
+                    if (value.Length > Constants.MaxGenreLength)
                     {
                         doItButton.IsEnabled = false;
                         throw new ApplicationException("");
@@ -87,7 +73,7 @@ namespace NuttinButCDs
 
         private bool AddGenre()
         {
-            if (!String.IsNullOrEmpty(editGenreTextBox.Text) && editGenreTextBox.Text.Length <= Constants.maxGenreLength)
+            if (!String.IsNullOrEmpty(editGenreTextBox.Text) && editGenreTextBox.Text.Length <= Constants.MaxGenreLength)
             {
                 MainWindow.AddGenre(editGenreTextBox.Text);
 

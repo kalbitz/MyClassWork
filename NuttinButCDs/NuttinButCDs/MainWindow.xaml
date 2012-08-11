@@ -25,54 +25,52 @@
         <CommandBinding Command="Close" CanExecute="CloseCanExecute" />
     </Window.CommandBindings>
     <Grid>
-    <DockPanel  x:Name="MainDock">
-        <ToolBar DockPanel.Dock ="Top" Height="26" Name="toolBar1" Background="Cornsilk">
-            <Button Content="Add" x:Name="AddButton" Click="AddButtonClick" Margin="5,0,0,0" />
-            <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButtonClick" Margin="5,0,0,0" />
-            <Button Content="Edit" x:Name="EditButton" Click="EditButtonClick" Margin="7,0,0,0" />
-            <Button Content="New Genre" x:Name="NewGenreButton" Click="NewGenreButtonClick" Margin="7,0,0,0" />
-            <Button Content="About" x:Name="AboutButton" Click="AboutButtonClick" Margin="7,0,0,0" />
-            <Separator Margin="7,0,0,0" />
-            <Button Content="Close" x:Name="CloseButton" Margin="40,0,0,0" IsCancel="True" Click="CloseButtonClick" Command="ApplicationCommands.Close" />
-        </ToolBar>
-
-        <DataGrid Background="Cornsilk" ItemsSource="MyAlbums" Name="albumDataGrid" SelectionMode="Single" GridLinesVisibility="Horizontal" RowBackground="Cornsilk" DataContext="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeRows="False" SelectionChanged="AlbumDataGridSelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Album Cover" IsReadOnly="True" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                                <Image Source="{Binding Path=AlbumImageSmall, Converter={StaticResource NullImageConverter}}" Height="30" MouseEnter="ImageMouseEnter" MouseLeave="ImageMouseLeave" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Path=AlbumName, Mode=OneWay}" Header="Album Name" IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding Path=ArtistName, Mode=OneWay}" Header="Artist" IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding Path=Genre, Mode=OneWay}" Header="Genre" IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding Path=Year, Mode=OneWay}" Header="Year" IsReadOnly="True" />
-                <DataGridTemplateColumn Header="Rating" IsReadOnly="True" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Path=Rating, Converter={StaticResource RatingToImageConverter1}}" Height="20" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Path=Comment, Mode=OneWay}" Header="Comment" IsReadOnly="True" />
-            </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <Border Margin="150,10" Padding="10" BorderBrush="Black" BorderThickness="3" CornerRadius="6">
-                        <ListBox Name="SongListBox" Style="{StaticResource ListStyleIfEmpty}" ItemsSource="{Binding Path=Songs}" Background="Cornsilk" />
-                    </Border>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-        </DataGrid>
-
-    </DockPanel>
-    <Grid Name="LargeAlbumCover" >
-        <Border BorderThickness="5" Width="210" Height="210" BorderBrush="Sienna">
-            <Image Height="200" Width="200" Name="LargeImage" />
-        </Border>
+        <DockPanel  x:Name="MainDock">
+            <ToolBar DockPanel.Dock ="Top" Height="26" Name="toolBar1" Background="Cornsilk">
+                <Button Content="Add" x:Name="AddButton" Click="AddButtonClick" Margin="5,0,0,0" />
+                <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButtonClick" Margin="5,0,0,0" />
+                <Button Content="Edit" x:Name="EditButton" Click="EditButtonClick" Margin="7,0,0,0" />
+                <Button Content="New Genre" x:Name="NewGenreButton" Click="NewGenreButtonClick" Margin="7,0,0,0" />
+                <Button Content="About" x:Name="AboutButton" Click="AboutButtonClick" Margin="7,0,0,0" />
+                <Separator Margin="20,0,0,0" />
+                <Button Content="Close" x:Name="CloseButton" Margin="20,0,0,0" IsCancel="True" Click="CloseButtonClick" Command="ApplicationCommands.Close" />
+                <Separator Margin="20,0,0,0" />
+                </ToolBar>
+            <DataGrid Background="Cornsilk" ItemsSource="MyAlbums" Name="albumDataGrid" SelectionMode="Single" GridLinesVisibility="Horizontal" RowBackground="Cornsilk" DataContext="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeRows="False" SelectionChanged="AlbumDataGridSelectionChanged" MouseDoubleClick="AlbumDataGridMouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Album Cover" IsReadOnly="True" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                    <Image Source="{Binding Path=AlbumImageSmall, Converter={StaticResource NullImageConverter}}" Height="30" MouseEnter="ImageMouseEnter" MouseLeave="ImageMouseLeave" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Path=AlbumName, Mode=OneWay}" Header="Album Name" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding Path=ArtistName, Mode=OneWay}" Header="Artist" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding Path=Genre, Mode=OneWay}" Header="Genre" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding Path=Year, Mode=OneWay}" Header="Year" IsReadOnly="True" />
+                    <DataGridTemplateColumn Header="Rating" IsReadOnly="True" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path=Rating, Converter={StaticResource RatingToImageConverter1}}" Height="20" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Path=Comment, Mode=OneWay}" Header="Comment" IsReadOnly="True" />
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Border Margin="150,10" Padding="10" BorderBrush="Black" BorderThickness="3" CornerRadius="6">
+                            <ListBox Name="SongListBox" Style="{StaticResource ListStyleIfEmpty}" ItemsSource="{Binding Path=Songs}" Background="Cornsilk" />
+                        </Border>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </DockPanel>
+        <Grid Name="LargeAlbumCover" >
+            <Border BorderThickness="5" Width="210" Height="210" BorderBrush="Sienna">
+                <Image Height="200" Width="200" Name="LargeImage" />
+            </Border>
+        </Grid>
     </Grid>
-    </Grid>
-
 </Window>
